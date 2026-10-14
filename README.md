@@ -32,6 +32,11 @@ O preço inicial de **R$ 149/mês é ilustrativo**, editável no painel. A empre
 - Nove modelos com navegação, apresentação, serviços, sobre, contato e formulário demonstrativo. Estilos próprios para cada segmento, usando fotografias reais.
 - Páginas de detalhes e prévias desktop, tablet e celular.
 - Formulário de briefing com referência selecionada, dados de contato e consentimento.
+- Briefing guiado em três etapas, com objetivo, seleção de recursos, expectativa de início e revisão antes de enviar. Os dados continuam no formato aceito pela API, sem alterar o banco.
+- WhatsApp flutuante no canto inferior direito com o número de atendimento configurado, referência escolhida na mensagem e atalhos a partir da solicitação e da mensalidade. O envio ocorre somente quando o visitante confirma no WhatsApp.
+- Atendimento editável em `/admin` → **Mensalidade** → **WhatsApp de atendimento**. Em modo demo, a alteração fica no navegador; no modo conectado, é salva no servidor. Sem número cadastrado, o balão oferece o formulário.
+- Busca de solicitações por negócio, cliente, e-mail e protocolo, filtro por etapa e atalhos de contato no painel administrativo.
+- Etapa atual explicada, protocolo e progresso acessível no painel do cliente. Solicitações canceladas têm uma apresentação própria.
 - Área do cliente para projetos, etapas, atualizações e histórico financeiro.
 - Painel administrativo com gestão de solicitações, catálogo, imagens, categorias, mensalidade, clientes e pagamentos.
 - Backend separado em Express e PostgreSQL, migração e seed que preservam dados existentes.

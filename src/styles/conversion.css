@@ -1,0 +1,721 @@
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  padding: 14px 20px;
+  border-radius: 8px;
+  background: #7ce9f4;
+  color: #071a2b;
+  font-weight: 700;
+  transform: translateY(-160%);
+}
+.skip-link:focus {
+  transform: none;
+}
+.whatsapp-widget {
+  position: fixed;
+  right: max(28px, env(safe-area-inset-right));
+  bottom: max(26px, env(safe-area-inset-bottom));
+  z-index: 70;
+}
+.whatsapp-fab {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid #8ef4c1;
+  background: #20c876;
+  color: #042d1d;
+  box-shadow:
+    0 8px 32px #0006,
+    0 0 24px #20c87630;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+.whatsapp-fab:hover {
+  transform: translateY(-3px);
+  background: #50e298;
+}
+.whatsapp-fab > span {
+  position: absolute;
+  right: 78px;
+  padding: 10px 15px;
+  border: 1px solid #35566b;
+  border-radius: 12px 12px 2px 12px;
+  background: #10263b;
+  color: #e8f8f6;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 650;
+  box-shadow: 0 6px 25px #0003;
+  pointer-events: none;
+}
+.whatsapp-fab[aria-expanded='true'] > span {
+  display: none;
+}
+.whatsapp-panel {
+  position: absolute;
+  right: 0;
+  bottom: 80px;
+  width: min(365px, calc(100vw - 36px));
+  max-height: calc(100dvh - 130px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #385d6d;
+  border-radius: 20px;
+  background: #0d1f33;
+  color: #ecf6ff;
+  box-shadow: 0 20px 70px #0008;
+  animation: dialog-enter 0.22s ease-out;
+}
+.whatsapp-panel > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px 16px 24px;
+  background: linear-gradient(115deg, #0c5e46, #124739);
+}
+.whatsapp-panel > header > span {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.whatsapp-panel > header > button {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 10px;
+  color: #d6fff1;
+  background: #ffffff0d;
+}
+.whatsapp-panel-body {
+  padding: 26px;
+}
+.whatsapp-panel-body .eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.3px;
+  color: #87ddc0;
+}
+.whatsapp-panel-body h2 {
+  font-size: 28px;
+  letter-spacing: -0.8px;
+  line-height: 1.3;
+  margin-top: 13px;
+}
+.whatsapp-panel-body p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #b2c6d8;
+  margin: 17px 0 22px;
+}
+.whatsapp-panel-body .contact-reference {
+  font-size: 13px;
+  padding: 12px;
+  border: 1px solid #385269;
+  background: #162c41;
+  border-radius: 8px;
+}
+.button.whatsapp-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 49px;
+  padding: 14px;
+  background: #3bdb8e;
+  color: #073122;
+  font-size: 15px;
+  border: 1px solid #74efb2;
+  box-shadow: none;
+}
+.button.whatsapp-action:hover {
+  background: #71efb1;
+  transform: translateY(-2px);
+}
+.contact-form-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 17px 0 13px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #cae9f5;
+}
+.whatsapp-panel-body > small {
+  display: block;
+  color: #95b1c3;
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: center;
+}
+.guided-request > aside,
+.guided-request > form {
+  min-width: 0;
+}
+.guided-request .request-form {
+  align-self: start;
+}
+.briefing-benefits {
+  list-style: none;
+  display: grid;
+  gap: 16px;
+  padding: 26px 0;
+}
+.briefing-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #b8cde2;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.briefing-benefits svg {
+  color: #70dcca;
+  flex-shrink: 0;
+}
+.briefing-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  list-style: none;
+  padding: 0 0 27px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid #304760;
+}
+.briefing-steps li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  color: #96afc7;
+}
+.briefing-steps li > span {
+  display: grid;
+  place-items: center;
+  width: 33px;
+  height: 33px;
+  border: 1px solid #425974;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 650;
+  background: #11263d;
+}
+.briefing-steps li > b {
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+.briefing-steps li[aria-current] {
+  color: #9de9f3;
+}
+.briefing-steps li[aria-current] > span {
+  background: #6fe2ef;
+  color: #08293a;
+  border-color: #91f1fa;
+  box-shadow: 0 0 18px #52cfea30;
+}
+.briefing-steps .completed > span {
+  background: #163f44;
+  color: #91edcb;
+  border-color: #3c7c78;
+}
+.briefing-reference {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  padding: 19px;
+  margin: 19px 0 24px;
+  border-radius: 12px;
+  background: linear-gradient(115deg, #24334e, #123549);
+  border: 1px solid #3b617c;
+}
+.briefing-reference > div {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.briefing-reference span {
+  color: #8bd8e7;
+  letter-spacing: 1.2px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.briefing-reference b {
+  font-size: 21px;
+  color: #e4f4ff;
+}
+.briefing-reference small {
+  color: #b1c4db;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.briefing-reference > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #98e9f1;
+  font-size: 13px;
+  font-weight: 650;
+  flex-shrink: 0;
+  min-height: 44px;
+}
+.briefing-features {
+  min-width: 0;
+  border: 0;
+  padding: 8px 0 22px;
+}
+.briefing-features legend {
+  font-size: 15px;
+  font-weight: 600;
+  color: #d1e3f2;
+  line-height: 1.6;
+}
+.briefing-features legend small {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9ab2c8;
+  margin-left: 8px;
+}
+.briefing-features > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.request-form .briefing-features label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  min-height: 50px;
+  border: 1px solid #35516a;
+  border-radius: 8px;
+  background: #0e253a;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.request-form .briefing-features label:has(input:checked) {
+  border-color: #6ed6e2;
+  color: #e5fbff;
+  background: #15394a;
+}
+.request-form .briefing-features input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: #70dfeb;
+}
+.briefing-features > p,
+.request-form .briefing-footnote {
+  color: #a1b9d0;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 14px 0 0;
+}
+.briefing-navigation {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+.briefing-navigation > .button-primary {
+  flex: 1;
+}
+.request-form .briefing-navigation .button {
+  min-height: 51px;
+  padding: 15px 18px;
+  font-size: 15px;
+}
+.briefing-review {
+  padding: 22px;
+  background: #0b1b2d;
+  border: 1px solid #314c65;
+  border-radius: 12px;
+  margin-bottom: 26px;
+}
+.briefing-review h3 {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  font-size: 18px;
+  letter-spacing: -0.4px;
+}
+.briefing-review h3 button {
+  color: #8ce0ef;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  min-height: 44px;
+  flex-shrink: 0;
+}
+.briefing-review dl {
+  display: grid;
+  gap: 13px;
+  margin: 16px 0 20px;
+}
+.briefing-review dl > div {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.briefing-review dt {
+  color: #91abc4;
+}
+.briefing-review dd {
+  color: #e0edf9;
+  overflow-wrap: anywhere;
+}
+.briefing-review details {
+  border-top: 1px solid #2d425d;
+  padding-top: 14px;
+}
+.briefing-review summary {
+  cursor: pointer;
+  color: #9ed9e9;
+  font-size: 13px;
+  padding: 6px 0;
+}
+.briefing-review details p {
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 15px 0;
+}
+.request-next {
+  text-align: left;
+  background: #0e283a;
+  border: 1px solid #355770;
+  border-radius: 12px;
+  padding: 23px;
+  margin: 24px 0;
+}
+.request-next h3 {
+  font-size: 21px;
+  margin-bottom: 16px;
+}
+.request-next ol {
+  padding-left: 20px;
+  color: #b4c9dc;
+  display: grid;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.request-form.success-state .button + .button {
+  margin-top: 12px;
+}
+.project-body .project-protocol {
+  font-size: 12px;
+  color: #98b4cb;
+  letter-spacing: 1px;
+  margin: 5px 0 18px;
+}
+.project-stage {
+  display: flex;
+  gap: 17px;
+  align-items: flex-start;
+  border: 1px solid #32516d;
+  border-radius: 11px;
+  padding: 22px;
+  margin-bottom: 22px;
+  background: linear-gradient(110deg, #133747, #16253e);
+}
+.project-stage > span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #226075;
+  color: #bbf6ff;
+  font-size: 16px;
+  font-weight: 700;
+}
+.project-stage h3 {
+  font-size: 21px;
+  margin-bottom: 9px;
+  letter-spacing: -0.4px;
+}
+.project-body .project-stage p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #b1c6da;
+}
+.project-stage.cancelled {
+  background: #2c2338;
+  border-color: #66506e;
+}
+.project-stage.cancelled > svg {
+  flex-shrink: 0;
+  color: #ccb0d0;
+  margin-top: 3px;
+}
+.project-progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px 15px;
+  list-style: none;
+  margin: 24px 0;
+  padding: 0;
+}
+.project-progress li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #8ca6bd;
+}
+.project-progress li > span {
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  border: 1px solid #405570;
+  border-radius: 50%;
+  background: #15273d;
+  font-size: 11px;
+}
+.project-progress b {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+.project-progress small {
+  display: block;
+  font-size: 10px;
+  margin-top: 5px;
+}
+.project-progress .complete {
+  color: #a0ddca;
+}
+.project-progress .complete > span {
+  color: #bdf6e3;
+  background: #215b4d;
+  border-color: #558c76;
+}
+.project-progress .current {
+  color: #b9f2ff;
+}
+.project-progress .current > span {
+  color: #08293a;
+  background: #71ddec;
+  border-color: #a6edf6;
+}
+.project-body > .project-briefing {
+  border: 1px solid #304962;
+  border-radius: 9px;
+  padding: 0 18px;
+  background: #0e2034;
+}
+.project-body .project-briefing > summary {
+  display: list-item;
+  min-height: 48px;
+  padding: 15px 0;
+  color: #bfdfed;
+  font-size: 14px;
+  cursor: pointer;
+}
+.project-body .project-briefing p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.9;
+  padding-bottom: 20px;
+}
+.project-contact {
+  margin-top: 21px;
+  font-size: 14px;
+}
+.admin-request-tools {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 0 22px;
+  padding: 24px;
+  background: #10243b;
+  border: 1px solid #34506c;
+  border-radius: 12px;
+}
+.admin-request-tools label {
+  font-size: 14px;
+  margin: 0;
+}
+.admin-request-tools p {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: #a0bad3;
+  margin-top: 14px;
+}
+.admin-request .request-description {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.admin-contact-actions {
+  display: flex;
+  gap: 10px 25px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+.admin-contact-actions .text-link {
+  font-size: 13px;
+  min-height: 44px;
+}
+.pricing-contact {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  font-size: 14px;
+  margin-top: 20px;
+  min-height: 44px;
+}
+@media (max-width: 1100px) {
+  .whatsapp-fab > span {
+    display: none;
+  }
+  .project-progress {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .whatsapp-widget {
+    right: max(17px, env(safe-area-inset-right));
+    bottom: max(17px, env(safe-area-inset-bottom));
+  }
+  .whatsapp-fab {
+    width: 58px;
+    height: 58px;
+  }
+  .whatsapp-panel {
+    bottom: 72px;
+    border-radius: 16px;
+    max-height: calc(100dvh - 112px);
+  }
+  .whatsapp-panel-body {
+    padding: 23px;
+  }
+  .whatsapp-panel-body h2 {
+    font-size: 27px;
+  }
+  .footer-bottom {
+    padding-bottom: 84px;
+  }
+  .toast {
+    bottom: 90px;
+  }
+  .briefing-steps {
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+  }
+  .briefing-steps li > b {
+    font-size: 12px;
+  }
+  .briefing-reference {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .briefing-features > div {
+    gap: 10px;
+  }
+  .request-form .briefing-features label {
+    font-size: 12px;
+    padding: 12px 10px;
+    gap: 8px;
+  }
+  .request-form .briefing-navigation .button {
+    font-size: 14px;
+    padding: 14px;
+  }
+  .briefing-review {
+    padding: 18px;
+  }
+  .briefing-review h3 {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .briefing-review dl > div {
+    grid-template-columns: 75px minmax(0, 1fr);
+  }
+  .briefing-review dl {
+    margin-top: 10px;
+  }
+  .project-stage {
+    padding: 19px 16px;
+    gap: 13px;
+  }
+  .project-stage h3 {
+    font-size: 20px;
+  }
+  .project-progress {
+    gap: 20px 10px;
+  }
+  .project-progress li {
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .project-progress b {
+    font-size: 12px;
+  }
+  .admin-request-tools {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    padding: 22px;
+  }
+  .admin-request-tools p {
+    margin: 0;
+  }
+  .deliverables-tabs > button {
+    font-size: 13px;
+  }
+  .catalog-modal-header p,
+  .catalog-project-info > div > a,
+  .catalog-modal-footer,
+  .catalog-modal-footer > a {
+    font-size: 13px;
+  }
+  .catalog-project-info > div > a {
+    min-height: 44px;
+  }
+  .catalog-modal-close {
+    width: 44px;
+    height: 44px;
+  }
+}
+@media (max-width: 380px) {
+  .request-form .briefing-features > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .project-progress {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-fab,
+  .button.whatsapp-action {
+    transition: none;
+  }
+  .whatsapp-panel {
+    animation: none;
+  }
+}

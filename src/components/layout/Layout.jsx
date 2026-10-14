@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Zap, Menu, X, CheckCircle2 } from 'lucide-react';
 import { usePlatform } from '../../contexts/PlatformContext';
 import { useCatalogModal } from '../../contexts/CatalogModalContext';
+import WhatsAppContact from '../ui/WhatsAppContact';
 export function Logo() {
   return (
     <Link to="/" className="logo" aria-label="SiteFlow início">
@@ -25,6 +26,9 @@ export default function Layout() {
   }, [location.pathname, location.hash]);
   return (
     <>
+      <a className="skip-link" href="#main">
+        Pular para o conteúdo
+      </a>
       <div className="announcement">
         Sua ideia. Nosso próximo projeto.{' '}
         <Link to="/solicitar">
@@ -42,14 +46,26 @@ export default function Layout() {
           >
             {open ? <X /> : <Menu />}
           </button>
-          <nav className={open ? 'nav open' : 'nav'} aria-label="Menu principal">
+          <nav
+            className={open ? 'nav open' : 'nav'}
+            aria-label="Menu principal"
+            onClick={(event) => {
+              if (event.target.closest('a')) setOpen(false);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Escape') setOpen(false);
+            }}
+          >
             <NavLink end to="/">
               Início
             </NavLink>
             <button
               type="button"
               className="nav-catalog-trigger"
-              onClick={openCatalog}
+              onClick={() => {
+                setOpen(false);
+                openCatalog();
+              }}
               aria-haspopup="dialog"
               aria-expanded={catalogOpen}
             >
@@ -74,7 +90,7 @@ export default function Layout() {
           <span /> Ambiente demonstrativo · Catálogo e valores ilustrativos
         </div>
       )}
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         {loading ? (
           <div className="empty-state">Carregando a plataforma…</div>
         ) : error ? (
@@ -135,6 +151,7 @@ export default function Layout() {
           {demo && <Link to="/admin">Explorar painel demo</Link>}
         </div>
       </footer>
+      <WhatsAppContact />
       {toast && (
         <div role="status" className="toast">
           <CheckCircle2 size={18} />

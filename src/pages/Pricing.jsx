@@ -3,9 +3,12 @@ import { ArrowUpRight, Check, ShieldCheck, MessageSquare, Sparkles } from 'lucid
 import { usePlatform } from '../contexts/PlatformContext';
 import { money, safeUrl } from '../services/api';
 import FAQ from '../components/ui/FAQ';
+import { projectMessage, whatsappLink } from '../../shared/contact';
+import { WhatsAppIcon } from '../components/ui/WhatsAppContact';
 export default function Pricing() {
   const { offer, demo } = usePlatform();
   const checkout = safeUrl(offer.checkoutUrl);
+  const contact = whatsappLink(offer.whatsapp, projectMessage());
   return (
     <>
       <div className="section page-section">
@@ -79,6 +82,16 @@ export default function Pricing() {
               Contratação após aprovação da proposta. Sem cobrança individual por modelo do
               catálogo.
             </small>
+            {contact && (
+              <a
+                className="pricing-contact text-link"
+                href={contact}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <WhatsAppIcon size={18} /> Tirar dúvidas pelo WhatsApp
+              </a>
+            )}
           </div>
         </div>
         <div className="terms-grid">

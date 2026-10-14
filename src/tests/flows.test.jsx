@@ -33,27 +33,50 @@ test('catálogo abre direto na vitrine e mantém acesso às categorias por link'
 test('solicitação demo é salva, aparece no painel e pode avançar de etapa no admin', async () => {
   const user = userEvent.setup();
   const view = mount('/solicitar?modelo=barber-studio');
-  await user.type(screen.getByLabelText('Seu nome'), 'Cliente Teste');
-  await user.type(screen.getByLabelText('E-mail'), 'teste@example.com');
   await user.type(screen.getByLabelText('Nome do seu negócio'), 'Barbearia Teste');
+  await user.click(screen.getByRole('button', { name: 'Continuar' }));
   await user.type(
     screen.getByLabelText(/Conte o que você tem em mente/),
     'Quero criar um site para minha barbearia com serviços e contato.',
   );
-  await user.click(screen.getByRole('checkbox'));
+  await user.click(screen.getByLabelText('Agendamento'));
+  await user.click(screen.getByRole('button', { name: 'Continuar' }));
+  await user.type(screen.getByLabelText('Seu nome'), 'Cliente Teste');
+  await user.type(screen.getByLabelText('E-mail'), 'teste@example.com');
+  await user.click(screen.getByRole('checkbox', { name: /Autorizo o uso/ }));
   await user.click(screen.getByRole('button', { name: 'Enviar minha ideia' }));
   await screen.findByText('Ideia salva na demonstração!');
   expect(JSON.parse(localStorage.getItem('siteflow.requests'))[0].model).toBe('barber-studio');
+  expect(JSON.parse(localStorage.getItem('siteflow.requests'))[0].description).toContain(
+    'Recursos desejados: Agendamento',
+  );
+  const contactUrl = new URL(
+    screen.getByRole('link', { name: /Conversar sobre este projeto/ }).href,
+  );
+  expect(contactUrl.pathname).toBe('/5581989957462');
+  expect(contactUrl.searchParams.get('text')).toContain('Barber Studio');
   await user.click(screen.getByRole('link', { name: /Acompanhar meus projetos/ }));
   expect(screen.getByText('Barbearia Teste')).toBeTruthy();
   view.unmount();
-  mount('/admin');
+  const adminView = mount('/admin');
   await user.selectOptions(screen.getByLabelText('Etapa do projeto'), 'Em desenvolvimento');
   await waitFor(() =>
     expect(JSON.parse(localStorage.getItem('siteflow.requests'))[0].status).toBe(
       'Em desenvolvimento',
     ),
   );
+  await user.type(screen.getByLabelText('Buscar solicitação'), 'não existe');
+  expect(screen.getByText('Nenhuma solicitação encontrada.')).toBeTruthy();
+  await user.click(screen.getByRole('button', { name: 'Limpar filtros' }));
+  expect(screen.getByText('Barbearia Teste')).toBeTruthy();
+  adminView.unmount();
+  mount('/painel');
+  await user.click(screen.getByText('Barbearia Teste'));
+  expect(screen.getByRole('heading', { name: 'Seu projeto em criação' })).toBeTruthy();
+  expect(
+    screen.getByRole('list', { name: 'Etapas do projeto' }).querySelector('[aria-current="step"]')
+      .textContent,
+  ).toContain('Em desenvolvimento');
 });
 test('edição de referência persiste e rascunho sai do catálogo público', async () => {
   const user = userEvent.setup();

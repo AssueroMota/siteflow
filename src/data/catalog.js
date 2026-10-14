@@ -11,6 +11,7 @@ export const categories = [
   'Outros Sistemas',
 ];
 export const initialOffer = {
+  whatsapp: '5581989957462',
   price: 149,
   checkoutUrl: '',
   productId: '',

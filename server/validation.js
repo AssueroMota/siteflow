@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { whatsappNumber } from '../shared/contact.js';
 const text = (max) => z.string().trim().min(1).max(max);
 export const email = z
   .email()
@@ -25,6 +26,14 @@ export const requestSchema = z.object({
   consent: z.literal(true),
 });
 export const offerSchema = z.object({
+  whatsapp: z
+    .string()
+    .max(30)
+    .refine(
+      (value) => !value || Boolean(whatsappNumber(value)),
+      'Informe um WhatsApp brasileiro com DDD.',
+    )
+    .default(''),
   title: text(150),
   price: z.number().positive().max(100000),
   checkoutUrl: httpsUrl,

@@ -14,7 +14,7 @@ export function PlatformProvider({ children }) {
     apiEnabled ? [] : read('siteflow.systems', initialSystems),
   );
   const [offer, setOffer] = useState(() =>
-    apiEnabled ? initialOffer : read('siteflow.offer', initialOffer),
+    apiEnabled ? initialOffer : { ...initialOffer, ...read('siteflow.offer', initialOffer) },
   );
   const [categories, setCategories] = useState(() =>
     read('siteflow.categories', defaultCategories),

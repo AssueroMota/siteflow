@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { Plus, LogOut, FolderKanban, CreditCard, Clock, ArrowUpRight, User } from 'lucide-react';
 import { usePlatform } from '../contexts/PlatformContext';
 import { api, money, safeUrl } from '../services/api';
+import ProjectProgress from '../components/ui/ProjectProgress';
+import { projectMessage, whatsappLink } from '../../shared/contact';
 export default function Dashboard() {
-  const { user, demo, logout, offer } = usePlatform();
+  const { user, demo, logout, offer, systems } = usePlatform();
   const [data, setData] = useState({ requests: [], orders: [] }),
     [error, setError] = useState(''),
     [loading, setLoading] = useState(true);
@@ -119,43 +121,39 @@ export default function Dashboard() {
                   </span>
                 </summary>
                 <div className="project-body">
-                  <p>{r.description}</p>
+                  <p className="project-protocol">Protocolo: {r.id.slice(0, 8).toUpperCase()}</p>
+                  <ProjectProgress status={r.status} />
                   {r.notes && (
                     <div className="info-box">
                       <b>Atualização da equipe</b>
                       <p>{r.notes}</p>
                     </div>
                   )}
-                  <div className="project-timeline">
-                    {[
-                      'Novo',
-                      'Em análise',
-                      'Proposta enviada',
-                      'Em desenvolvimento',
-                      'Em revisão',
-                      'Entregue',
-                    ].map((t, i) => (
-                      <span
-                        key={t}
-                        className={
-                          i <=
-                          [
-                            'Novo',
-                            'Em análise',
-                            'Proposta enviada',
-                            'Em desenvolvimento',
-                            'Em revisão',
-                            'Entregue',
-                          ].indexOf(r.status)
-                            ? 'complete'
-                            : ''
-                        }
-                      >
-                        <i />
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                  <details className="project-briefing">
+                    <summary>Consultar minha solicitação</summary>
+                    <p>{r.description}</p>
+                    {r.model && (
+                      <p>
+                        Referência: {systems.find((item) => item.id === r.model)?.name || r.model}
+                      </p>
+                    )}
+                  </details>
+                  {whatsappLink(offer.whatsapp, '') && (
+                    <a
+                      className="text-link project-contact"
+                      href={whatsappLink(
+                        offer.whatsapp,
+                        projectMessage(
+                          systems.find((item) => item.id === r.model)?.name,
+                          r.id.slice(0, 8).toUpperCase(),
+                        ),
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Conversar sobre o projeto <ArrowUpRight size={17} />
+                    </a>
+                  )}
                 </div>
               </details>
             ))

@@ -45,9 +45,9 @@ export default function Home() {
             </span>
           </h1>
           <p>
-            Um site com a sua cara. Um sistema do seu jeito.
-            <br className="desktop-break" /> Conte sua ideia, deixe a criação com a gente e mantenha
-            tudo funcionando com uma mensalidade.
+            Você conta sua ideia. Nós criamos o site ou sistema para o seu negócio.
+            <br className="desktop-break" /> Uma mensalidade mantém o cuidado com seu projeto,
+            conforme o escopo combinado.
           </p>
           <div className="hero-actions">
             <Link to="/solicitar" className="button button-primary">

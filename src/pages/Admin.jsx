@@ -18,6 +18,8 @@ import {
 import { usePlatform } from '../contexts/PlatformContext';
 import { api, safeUrl } from '../services/api';
 import TestimonialsEditor from '../components/admin/TestimonialsEditor';
+import { whatsappNumber, whatsappLink } from '../../shared/contact';
+import { projectJourney } from '../data/projectJourney';
 const tabs = [
   ['requests', 'Solicitações', FolderKanban],
   ['catalog', 'Catálogo', LayoutGrid],
@@ -49,6 +51,8 @@ export default function Admin() {
     [error, setError] = useState(''),
     [busy, setBusy] = useState(false),
     [confirmDelete, setConfirmDelete] = useState('');
+  const [requestQuery, setRequestQuery] = useState(''),
+    [requestStatus, setRequestStatus] = useState('Todos');
   useEffect(() => {
     if (demo) {
       setRequests(JSON.parse(localStorage.getItem('siteflow.requests') || '[]'));
@@ -129,6 +133,13 @@ export default function Admin() {
       imageUrl: '',
       createdAt: new Date().toISOString(),
     });
+  const filteredRequests = requests.filter(
+    (item) =>
+      (requestStatus === 'Todos' || item.status === requestStatus) &&
+      `${item.business} ${item.name} ${item.email} ${item.id}`
+        .toLocaleLowerCase('pt-BR')
+        .includes(requestQuery.trim().toLocaleLowerCase('pt-BR')),
+  );
   return (
     <div className="admin-layout">
       <aside className="admin-sidebar">
@@ -181,8 +192,32 @@ export default function Admin() {
         )}
         {tab === 'requests' && (
           <div className="admin-requests">
-            {requests.length ? (
-              requests.map((r) => (
+            <div className="admin-request-tools">
+              <label>
+                Buscar solicitação
+                <input
+                  type="search"
+                  value={requestQuery}
+                  onChange={(e) => setRequestQuery(e.target.value)}
+                  placeholder="Negócio, cliente, e-mail ou protocolo"
+                />
+              </label>
+              <label>
+                Filtrar por etapa
+                <select value={requestStatus} onChange={(e) => setRequestStatus(e.target.value)}>
+                  {['Todos', ...projectJourney.map(([status]) => status), 'Cancelado'].map(
+                    (status) => (
+                      <option key={status}>{status}</option>
+                    ),
+                  )}
+                </select>
+              </label>
+              <p role="status">
+                {filteredRequests.length} de {requests.length} solicitações
+              </p>
+            </div>
+            {filteredRequests.length ? (
+              filteredRequests.map((r) => (
                 <article className="admin-request" key={r.id}>
                   <div>
                     <span className="status-badge">{r.status}</span>
@@ -191,12 +226,31 @@ export default function Admin() {
                     </small>
                   </div>
                   <h3>{r.business}</h3>
+                  <small>Protocolo: {r.id.slice(0, 8).toUpperCase()}</small>
                   <p>
                     {r.name} · {r.email}
                     {r.phone && ` · ${r.phone}`}
                   </p>
                   <b>{r.type}</b>
                   <p className="request-description">{r.description}</p>
+                  <div className="admin-contact-actions">
+                    <a className="text-link" href={`mailto:${r.email}`}>
+                      Responder por e-mail
+                    </a>
+                    {whatsappLink(r.phone, '') && (
+                      <a
+                        className="text-link"
+                        href={whatsappLink(
+                          r.phone,
+                          `Olá, ${r.name}! Aqui é da SiteFlow. Vamos conversar sobre sua solicitação ${r.id.slice(0, 8).toUpperCase()}?`,
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Conversar no WhatsApp
+                      </a>
+                    )}
+                  </div>
                   {r.model && (
                     <small>
                       Referência: {systems.find((s) => s.id === r.model)?.name || r.model}
@@ -209,15 +263,7 @@ export default function Admin() {
                       disabled={busy}
                       onChange={(e) => run(() => updateRequest(r.id, { status: e.target.value }))}
                     >
-                      {[
-                        'Novo',
-                        'Em análise',
-                        'Proposta enviada',
-                        'Em desenvolvimento',
-                        'Em revisão',
-                        'Entregue',
-                        'Cancelado',
-                      ].map((s) => (
+                      {[...projectJourney.map(([status]) => status), 'Cancelado'].map((s) => (
                         <option key={s}>{s}</option>
                       ))}
                     </select>
@@ -249,11 +295,31 @@ export default function Admin() {
             ) : (
               <div className="panel-empty">
                 <FolderKanban size={40} />
-                <h2>O próximo projeto começa aqui.</h2>
-                <p>Solicitações feitas no site aparecem neste painel.</p>
-                <Link to="/solicitar" className="text-link">
-                  Testar uma solicitação →
-                </Link>
+                <h2>
+                  {requests.length
+                    ? 'Nenhuma solicitação encontrada.'
+                    : 'O próximo projeto começa aqui.'}
+                </h2>
+                <p>
+                  {requests.length
+                    ? 'Experimente outro termo ou outra etapa.'
+                    : 'Solicitações feitas no site aparecem neste painel.'}
+                </p>
+                {requests.length ? (
+                  <button
+                    className="text-link"
+                    onClick={() => {
+                      setRequestQuery('');
+                      setRequestStatus('Todos');
+                    }}
+                  >
+                    Limpar filtros
+                  </button>
+                ) : (
+                  <Link to="/solicitar" className="text-link">
+                    Testar uma solicitação →
+                  </Link>
+                )}
               </div>
             )}
           </div>
@@ -327,6 +393,10 @@ export default function Admin() {
             className="admin-form"
             onSubmit={(e) => {
               e.preventDefault();
+              if (offerForm.whatsapp && !whatsappNumber(offerForm.whatsapp)) {
+                setError('Informe um WhatsApp brasileiro com DDD.');
+                return;
+              }
               run(() => saveOffer({ ...offerForm, price: Number(offerForm.price) }));
             }}
           >
@@ -365,6 +435,22 @@ export default function Admin() {
                 />
               </label>
             </div>
+            <label htmlFor="whatsapp-setting">
+              WhatsApp de atendimento
+              <input
+                id="whatsapp-setting"
+                aria-describedby="whatsapp-setting-help"
+                type="tel"
+                maxLength={30}
+                autoComplete="tel"
+                placeholder="81 98995-7462"
+                value={offerForm.whatsapp || ''}
+                onChange={(e) => setOfferForm({ ...offerForm, whatsapp: e.target.value })}
+              />
+            </label>
+            <small id="whatsapp-setting-help">
+              Número público usado no botão flutuante. Inclua o DDD.
+            </small>
             <label>
               Link do checkout de assinatura
               <input
