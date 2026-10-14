@@ -45,6 +45,7 @@ export default function Layout() {
               Início
             </NavLink>
             <NavLink to="/catalogo">Explore o catálogo</NavLink>
+            <Link to="/#quem-somos">Quem somos</Link>
             <Link to="/#como-funciona">Como funciona</Link>
             <NavLink to="/mensalidade">Mensalidade</NavLink>
           </nav>
@@ -98,6 +99,7 @@ export default function Layout() {
             <Link to="/#como-funciona">Como funciona</Link>
             <Link to="/painel">Área do cliente</Link>
             <Link to="/#duvidas">Perguntas frequentes</Link>
+            <Link to="/#clientes">Experiências de clientes</Link>
           </div>
           <div className="footer-note">
             <span>VAMOS TIRAR DO PAPEL?</span>

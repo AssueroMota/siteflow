@@ -80,3 +80,23 @@ export const statusSchema = z
     notes: z.string().max(2000).optional(),
   })
   .refine((v) => v.status !== undefined || v.notes !== undefined);
+export const testimonialsSchema = z.object({
+  testimonials: z
+    .array(
+      z
+        .object({
+          id: z.uuid(),
+          name: text(100),
+          business: text(150),
+          quote: text(1500).min(20),
+          consentNote: z.string().max(500).default(''),
+          authorized: z.boolean(),
+          published: z.boolean(),
+        })
+        .refine(
+          (item) => !item.published || item.authorized,
+          'Depoimentos publicados precisam de autorização.',
+        ),
+    )
+    .max(100),
+});

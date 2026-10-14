@@ -17,8 +17,10 @@ import {
   offerSchema,
   systemSchema,
   statusSchema,
+  testimonialsSchema,
 } from './validation.js';
 import { normalizeWebhook, processWebhook } from './hotmart.js';
+import { publicTestimonials } from './testimonials.js';
 const app = express();
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const origin = process.env.APP_ORIGIN || 'http://127.0.0.1:5173';
@@ -131,6 +133,10 @@ app.get('/api/catalog', async (req, res) => {
     systems: rows.map((r) => r.data).filter((s) => req.user?.role === 'admin' || s.published),
     offer: { ...(await setting('offer')), mode: 'live' },
     categories: await setting('categories', ['Todos']),
+    testimonials:
+      req.user?.role === 'admin'
+        ? await setting('testimonials', [])
+        : publicTestimonials(await setting('testimonials', [])),
   });
 });
 app.get('/api/auth/me', (req, res) => res.json({ user: req.user ? publicUser(req.user) : null }));
@@ -311,6 +317,14 @@ app.put('/api/admin/categories', admin, async (req, res) => {
     ['categories', JSON.stringify(unique)],
   );
   res.json({ categories: unique });
+});
+app.put('/api/admin/testimonials', admin, async (req, res) => {
+  const { testimonials } = parse(testimonialsSchema, req.body);
+  await pool.query(
+    'INSERT INTO settings(key,value) VALUES($1,$2) ON CONFLICT(key) DO UPDATE SET value=EXCLUDED.value',
+    ['testimonials', JSON.stringify(testimonials)],
+  );
+  res.json({ testimonials });
 });
 app.get('/api/admin/customers', admin, async (req, res) =>
   res.json(

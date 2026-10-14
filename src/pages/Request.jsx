@@ -11,7 +11,8 @@ export default function Request() {
     email: user?.email || '',
     phone: '',
     business: '',
-    type: 'Site institucional',
+    type:
+      params.get('tipo') === 'melhorar' ? 'Melhoria de projeto existente' : 'Site institucional',
     model: params.get('modelo') || '',
     description: '',
     consent: false,
@@ -157,6 +158,7 @@ export default function Request() {
                 <select name="type" value={form.type} onChange={change}>
                   {[
                     'Site institucional',
+                    'Melhoria de projeto existente',
                     'Loja virtual',
                     'Landing page',
                     'Sistema personalizado',

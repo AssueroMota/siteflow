@@ -22,6 +22,10 @@ O preço inicial de **R$ 149/mês é ilustrativo**, editável no painel. A empre
 ## O que está implementado
 
 - Homepage comercial, benefícios, etapas, oferta mensal e perguntas frequentes.
+- Vitrine com carrossel dentro de um laptop, navegação por setas, indicadores, teclado e gesto de arrastar; reprodução automática pode ser pausada e respeita redução de movimento.
+- Busca e ordenação alinhadas em um painel de filtros, com ícones e contagem por categoria. O carrossel acompanha os filtros aplicados.
+- Seções “Quem somos”, experiências de clientes e caminhos de contato para criar ou melhorar um projeto.
+- Cadastro de depoimentos no painel: rascunhos, autorização de publicação e exibição na página inicial. Nenhum depoimento fictício acompanha o projeto.
 - Nove referências visuais com categorias, busca e ordenação.
 - Páginas de detalhes e prévias desktop, tablet e celular.
 - Formulário de briefing com referência selecionada, dados de contato e consentimento.
@@ -113,6 +117,8 @@ npm run server
 ```
 
 O Express serve `dist` com fallback para as rotas React. Hospedagem apenas estática permite a demonstração, mas não executa autenticação, banco ou cobrança. Fontes são carregadas do Google Fonts, com fallback local.
+
+Depoimentos são persistidos no armazenamento local da demonstração ou em `settings` no PostgreSQL conectado. O endpoint administrativo exige autorização de publicação; notas de comprovação ficam restritas à administração. Sem depoimentos publicados, a página apresenta um convite para iniciar uma história, sem simular avaliações ou clientes. Os textos de “Quem somos” apresentam a proposta da SiteFlow, sem inventar nomes, números ou tempo de mercado. Substitua-os pela descrição oficial da empresa quando disponível.
 
 Antes da operação comercial, configure domínio e proxy HTTPS, PostgreSQL persistente, SMTP, assinatura Hotmart e backups. Substitua o preço ilustrativo, as referências iniciais e os textos comerciais por informações da empresa. Defina contrato, escopo, propriedade do projeto, hospedagem, suporte, retenção de dados e cancelamento. Evoluções possíveis: recuperação de senha, anexos do briefing, propostas formais, aprovação contratual e atendimento integrado.
 

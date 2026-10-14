@@ -1,7 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
-import { Search, SlidersHorizontal, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Search, ArrowUpRight, Sparkles } from 'lucide-react';
 import { usePlatform } from '../contexts/PlatformContext';
 import SystemCard from '../components/ui/SystemCard';
+import CatalogFilters from '../components/catalog/CatalogFilters';
+import LaptopShowcase from '../components/ui/LaptopShowcase';
 export default function Catalog() {
   const { systems, categories } = usePlatform();
   const [params, setParams] = useSearchParams();
@@ -19,7 +22,7 @@ export default function Catalog() {
       (s) =>
         s.published &&
         (category === 'Todos' || s.category === category) &&
-        `${s.name} ${s.description} ${s.category}`
+        `${s.name} ${s.description} ${s.category} ${s.features.join(' ')}`
           .toLocaleLowerCase('pt-BR')
           .includes(query.toLocaleLowerCase('pt-BR')),
     )
@@ -44,45 +47,27 @@ export default function Catalog() {
           ideia.
         </p>
       </div>
-      <div className="catalog-toolbar">
-        <label className="search-input">
-          <Search size={20} />
-          <input
-            aria-label="Buscar modelos"
-            placeholder="O que você quer criar?"
-            value={query}
-            onChange={(e) => change('q', e.target.value)}
-          />
-          {query && (
-            <button onClick={() => change('q', '')} aria-label="Limpar busca">
-              <X size={16} />
-            </button>
-          )}
-        </label>
-        <label className="sort-label">
-          <SlidersHorizontal size={18} />
-          <select
-            aria-label="Ordenar catálogo"
-            value={sort}
-            onChange={(e) => change('ordem', e.target.value)}
-          >
-            <option value="destaques">Em destaque</option>
-            <option value="nome">Nome: A a Z</option>
-            <option value="recentes">Mais recentes</option>
-          </select>
-        </label>
-      </div>
-      <div className="category-pills wrap">
-        {categories.map((c) => (
-          <button
-            className={c === category ? 'active' : ''}
-            key={c}
-            onClick={() => change('categoria', c === 'Todos' ? '' : c)}
-          >
-            {c}
-          </button>
-        ))}
-      </div>
+      <CatalogFilters
+        query={query}
+        category={category}
+        sort={sort}
+        categories={categories}
+        systems={systems}
+        onChange={change}
+        onReset={() => setParams({})}
+      />
+      {filtered.length > 0 && (
+        <div className="catalog-laptop-section">
+          <div className="catalog-presentation-title">
+            <span className="eyebrow">UM OLHAR MAIS DE PERTO</span>
+            <h2>
+              Veja as possibilidades <span>em ação.</span>
+            </h2>
+            <p>Navegue pelos modelos e encontre o ponto de partida para o seu projeto.</p>
+          </div>
+          <LaptopShowcase systems={filtered} label="Vitrine de sistemas do catálogo" />
+        </div>
+      )}
       <div className="catalog-count">
         <span>
           {filtered.length}{' '}
@@ -109,6 +94,16 @@ export default function Catalog() {
       <div className="info-box">
         Referências ilustrativas. Funcionalidades finais, integrações e prazo serão definidos na
         proposta do seu projeto.
+      </div>
+      <div className="catalog-conversation">
+        <Sparkles size={26} />
+        <div>
+          <h3>O que você precisa ainda não está aqui?</h3>
+          <p>Conte sua ideia. Também criamos sites e sistemas do zero.</p>
+        </div>
+        <Link to="/solicitar" className="button button-outline">
+          Vamos conversar <ArrowUpRight size={17} />
+        </Link>
       </div>
     </div>
   );

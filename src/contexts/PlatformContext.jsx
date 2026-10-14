@@ -19,6 +19,9 @@ export function PlatformProvider({ children }) {
   const [categories, setCategories] = useState(() =>
     read('siteflow.categories', defaultCategories),
   );
+  const [testimonials, setTestimonials] = useState(() =>
+    apiEnabled ? [] : read('siteflow.testimonials', []),
+  );
   const [user, setUser] = useState(null),
     [loading, setLoading] = useState(apiEnabled),
     [error, setError] = useState('');
@@ -31,6 +34,7 @@ export function PlatformProvider({ children }) {
         setOffer(catalog.offer);
         setCategories(catalog.categories);
         setUser(auth.user);
+        setTestimonials(catalog.testimonials || []);
       })
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
@@ -41,11 +45,12 @@ export function PlatformProvider({ children }) {
         localStorage.setItem('siteflow.systems', JSON.stringify(systems));
         localStorage.setItem('siteflow.offer', JSON.stringify(offer));
         localStorage.setItem('siteflow.categories', JSON.stringify(categories));
+        localStorage.setItem('siteflow.testimonials', JSON.stringify(testimonials));
       } catch {
         setToast('Armazenamento local cheio. Use uma imagem menor para salvar a demonstração.');
       }
     }
-  }, [systems, offer, categories]);
+  }, [systems, offer, categories, testimonials]);
   useEffect(() => {
     if (!toast) return;
     const timer = setTimeout(() => setToast(''), 4500);
@@ -89,12 +94,23 @@ export function PlatformProvider({ children }) {
         setUser(data.user);
         const catalog = await api('/catalog');
         setSystems(catalog.systems);
+        setTestimonials(catalog.testimonials || []);
       }
       return data;
     } else {
       setUser({ id: 'demo', name: name || 'Visitante', email, role: 'customer', demo: true });
       return {};
     }
+  }
+  async function saveTestimonials(items) {
+    const data = apiEnabled
+      ? await api('/admin/testimonials', {
+          method: 'PUT',
+          body: JSON.stringify({ testimonials: items }),
+        })
+      : { testimonials: items };
+    setTestimonials(data.testimonials);
+    setToast('Depoimentos atualizados.');
   }
   async function logout() {
     if (apiEnabled) await api('/auth/logout', { method: 'POST' });
@@ -115,6 +131,8 @@ export function PlatformProvider({ children }) {
         deleteSystem,
         saveOffer,
         saveCategories,
+        testimonials,
+        saveTestimonials,
         login,
         logout,
         demo: !apiEnabled,

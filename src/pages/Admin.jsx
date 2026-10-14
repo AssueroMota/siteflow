@@ -13,15 +13,18 @@ import {
   X,
   Upload,
   Tags,
+  Quote,
 } from 'lucide-react';
 import { usePlatform } from '../contexts/PlatformContext';
 import { api, safeUrl } from '../services/api';
+import TestimonialsEditor from '../components/admin/TestimonialsEditor';
 const tabs = [
   ['requests', 'Solicitações', FolderKanban],
   ['catalog', 'Catálogo', LayoutGrid],
   ['offer', 'Mensalidade', Settings2],
   ['categories', 'Categorias', Tags],
   ['customers', 'Clientes', Users],
+  ['testimonials', 'Depoimentos', Quote],
   ['orders', 'Pagamentos', CreditCard],
 ];
 export default function Admin() {
@@ -428,6 +431,7 @@ export default function Admin() {
             </button>
           </form>
         )}
+        {tab === 'testimonials' && <TestimonialsEditor />}
         {tab === 'customers' &&
           (customers.length ? (
             <div className="table-scroll">

@@ -18,7 +18,10 @@ import { photos } from '../data/photography';
 import { usePlatform } from '../contexts/PlatformContext';
 import { money } from '../services/api';
 import Preview from '../components/ui/Preview';
-import SystemCard from '../components/ui/SystemCard';
+import LaptopShowcase from '../components/ui/LaptopShowcase';
+import AboutSection from '../components/home/AboutSection';
+import TrustSection from '../components/home/TrustSection';
+import LeadSection from '../components/home/LeadSection';
 import FAQ from '../components/ui/FAQ';
 export default function Home() {
   const { systems, categories, offer, demo } = usePlatform();
@@ -139,11 +142,10 @@ export default function Home() {
             </Link>
           ))}
         </div>
-        <div className="card-grid">
-          {feature.map((s) => (
-            <SystemCard key={s.id} system={s} />
-          ))}
-        </div>
+        <LaptopShowcase
+          systems={feature.length ? feature : visible}
+          label="Conheça nossos modelos no laptop"
+        />
         <div className="catalog-note">
           <Sparkles size={17} />
           <p>Não encontrou sua ideia? Também criamos projetos do zero.</p>
@@ -152,6 +154,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      <AboutSection />
       <section className="process-section" id="como-funciona">
         <div className="section">
           <div className="section-heading">
@@ -284,6 +287,8 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      <TrustSection />
+      <LeadSection />
       <section className="section">
         <div className="offer-banner">
           <div>
