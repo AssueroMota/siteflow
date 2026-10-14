@@ -117,6 +117,14 @@ Não havia PostgreSQL, Docker ou navegador de automação conectado no ambiente 
 
 ## Publicação e próximos passos
 
+### Frontend na Vercel
+
+O `vercel.json` configura o build Vite, a saída `dist` e o fallback das rotas para `index.html`. Esse fallback permite abrir diretamente `/catalogo`, `/solicitar` e `/modelos/:id`, inclusive dentro do iframe do laptop. Sem ele, essas URLs retornam 404 na hospedagem, embora funcionem no servidor de desenvolvimento.
+
+As imagens versionadas em `public/images` são copiadas pelo build para `dist/images`. Não é necessário fazer upload separado. Para uma nova publicação, use o repositório atualizado, branch `main`, com o diretório do projeto que contém `package.json` e `vercel.json`. Se a integração Git não publicar automaticamente, faça um novo deploy do último commit.
+
+Essa configuração publica o frontend demonstrativo. Para usar a API real, hospede e configure o backend e seu encaminhamento antes de ativar `VITE_API_ENABLED`.
+
 Para servir frontend e backend no mesmo Node:
 
 ```powershell
