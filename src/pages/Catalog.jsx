@@ -1,8 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Search, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { usePlatform } from '../contexts/PlatformContext';
-import SystemCard from '../components/ui/SystemCard';
 import LaptopShowcase from '../components/ui/LaptopShowcase';
 export default function Catalog() {
   const { systems } = usePlatform();
@@ -31,29 +29,15 @@ export default function Catalog() {
       {filtered.length > 0 && (
         <div className="catalog-laptop-section">
           <div className="catalog-presentation-title">
-            <span className="eyebrow">UM OLHAR MAIS DE PERTO</span>
             <h1>
-              Veja as possibilidades <span>em ação.</span>
+              Landing pages para <span>o seu negócio.</span>
             </h1>
-            <p>Navegue pelos modelos e encontre o ponto de partida para o seu projeto.</p>
+            <p>Explore os modelos ou abra uma página para conhecer todos os detalhes.</p>
           </div>
           <LaptopShowcase systems={filtered} label="Vitrine de sistemas do catálogo" />
         </div>
       )}
-      <div className="catalog-count">
-        <span>
-          {filtered.length}{' '}
-          {filtered.length === 1 ? 'referência encontrada' : 'referências encontradas'}
-        </span>
-        <span>Todos os modelos são personalizáveis</span>
-      </div>
-      {filtered.length ? (
-        <div className="card-grid catalog-grid">
-          {filtered.map((s) => (
-            <SystemCard key={s.id} system={s} />
-          ))}
-        </div>
-      ) : (
+      {!filtered.length && (
         <div className="empty-state">
           <Search size={35} />
           <h2>A sua ideia pode ser a próxima.</h2>
@@ -63,20 +47,6 @@ export default function Catalog() {
           </button>
         </div>
       )}
-      <div className="info-box">
-        Referências ilustrativas. Funcionalidades finais, integrações e prazo serão definidos na
-        proposta do seu projeto.
-      </div>
-      <div className="catalog-conversation">
-        <Sparkles size={26} />
-        <div>
-          <h3>O que você precisa ainda não está aqui?</h3>
-          <p>Conte sua ideia. Também criamos sites e sistemas do zero.</p>
-        </div>
-        <Link to="/solicitar" className="button button-outline">
-          Vamos conversar <ArrowUpRight size={17} />
-        </Link>
-      </div>
     </div>
   );
 }

@@ -40,7 +40,7 @@ app.use(
         'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
         'font-src': ["'self'", 'https://fonts.gstatic.com'],
         'img-src': ["'self'", 'https:', 'data:'],
-        'frame-src': ['https:'],
+        'frame-src': ["'self'", 'https:'],
         'connect-src': ["'self'"],
         'upgrade-insecure-requests': production ? [] : null,
       },

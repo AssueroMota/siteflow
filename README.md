@@ -22,11 +22,11 @@ O preço inicial de **R$ 149/mês é ilustrativo**, editável no painel. A empre
 ## O que está implementado
 
 - Homepage comercial, benefícios, etapas, oferta mensal e perguntas frequentes.
-- Vitrine com carrossel dentro de um laptop, navegação por setas, indicadores, teclado e gesto de arrastar; reprodução automática pode ser pausada e respeita redução de movimento.
-- Catálogo com entrada direta no carrossel do laptop, sem bloco de introdução ou painel de busca e filtros. Links de categorias da página inicial continuam funcionando.
+- Vitrine com landing pages navegáveis dentro de um laptop, setas, indicadores e pausa da apresentação automática. Os modelos completos abrem também em uma página independente.
+- Apresentação direta no carrossel, com nome e duas ações. As páginas completas substituem as capas antigas, sem metadados de “conceito de site” nem grade repetida dos mesmos projetos.
 - Seções “Quem somos”, experiências de clientes e caminhos de contato para criar ou melhorar um projeto.
 - Cadastro de depoimentos no painel: rascunhos, autorização de publicação e exibição na página inicial. Nenhum depoimento fictício acompanha o projeto.
-- Nove referências visuais com categorias, busca e ordenação.
+- Nove modelos com navegação, apresentação, serviços, sobre, contato e formulário demonstrativo. Estilos próprios para cada segmento, usando fotografias reais.
 - Páginas de detalhes e prévias desktop, tablet e celular.
 - Formulário de briefing com referência selecionada, dados de contato e consentimento.
 - Área do cliente para projetos, etapas, atualizações e histórico financeiro.
@@ -35,7 +35,7 @@ O preço inicial de **R$ 149/mês é ilustrativo**, editável no painel. A empre
 - Autenticação com scrypt, sessão em cookie HttpOnly e confirmação de e-mail via SMTP.
 - Webhook Hotmart 2.0 com validação de token e produto, idempotência, controle de vigência, reembolso e cancelamento.
 
-As prévias iniciais são **conceitos de design em HTML/CSS com fotografias reais do Unsplash**, não sistemas completos já entregues. A equipe pode cadastrar screenshots e links de demonstrações reais. O formulário registra uma solicitação; não desenvolve automaticamente o projeto do cliente.
+As landing pages são **modelos frontend completos de apresentação**, implementados em React com fotografias reais do Unsplash. Os formulários dos modelos demonstram a interação localmente e não enviam contatos ou agendamentos reais. Não são sistemas de gestão com integrações prontas nem projetos já entregues a clientes. A equipe pode cadastrar screenshots e URLs de demonstrações externas, que têm prioridade sobre os modelos locais. O briefing da SiteFlow continua registrando a solicitação do projeto.
 
 As sete fotografias são servidas localmente em `public/images`, em WebP. Fontes e créditos estão na página `/creditos` e em [IMAGE_CREDITS.md](IMAGE_CREDITS.md). Pessoas e estabelecimentos das fotos não representam clientes da SiteFlow. Imagens cadastradas pelo administrador têm prioridade sobre as fotografias padrão.
 
@@ -44,7 +44,8 @@ As sete fotografias são servidas localmente em `public/images`, em WebP. Fontes
 | Rota               | Função                                         |
 | ------------------ | ---------------------------------------------- |
 | `/`                | Página comercial                               |
-| `/catalogo`        | Referências e filtros                          |
+| `/catalogo`        | Carrossel de landing pages                     |
+| `/modelos/:id`     | Landing page completa e independente           |
 | `/catalogo/:id`    | Detalhes da inspiração                         |
 | `/demo/:id`        | Prévia por dispositivo ou demonstração externa |
 | `/solicitar`       | Briefing do projeto                            |

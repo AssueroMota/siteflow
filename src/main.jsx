@@ -6,6 +6,7 @@ import App from './routes/App';
 import './styles/global.css';
 import './styles/neon.css';
 import './styles/marketing.css';
+import './styles/landing.css';
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Sparkles,
   Code2,
-  MousePointer2,
   Check,
   ShieldCheck,
   Headphones,
@@ -17,16 +16,14 @@ import {
 import { photos } from '../data/photography';
 import { usePlatform } from '../contexts/PlatformContext';
 import { money } from '../services/api';
-import Preview from '../components/ui/Preview';
 import LaptopShowcase from '../components/ui/LaptopShowcase';
 import AboutSection from '../components/home/AboutSection';
 import TrustSection from '../components/home/TrustSection';
 import LeadSection from '../components/home/LeadSection';
 import FAQ from '../components/ui/FAQ';
 export default function Home() {
-  const { systems, categories, offer, demo } = usePlatform();
+  const { systems, offer, demo } = usePlatform();
   const visible = systems.filter((s) => s.published);
-  const feature = visible.filter((s) => s.featured).slice(0, 4);
   return (
     <>
       <section className="hero section">
@@ -87,7 +84,6 @@ export default function Home() {
           <div className="floating-label top-label">
             <Sparkles size={20} /> Sua marca em outra dimensão
           </div>
-          <div className="hero-mini-preview">{visible[0] && <Preview system={visible[0]} />}</div>
           <div className="floating-label bottom-label">
             <span className="status-dot" />
             <div>
@@ -96,8 +92,6 @@ export default function Home() {
             </div>
             <ArrowUpRight size={19} />
           </div>
-          <MousePointer2 className="hero-cursor" size={32} fill="#28d9f3" />
-          <span className="cursor-name">Sua ideia aqui</span>
         </div>
       </section>
       <section className="promise-strip">
@@ -120,39 +114,16 @@ export default function Home() {
       <section className="section showcase" id="catalogo">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">UM POUCO DE INSPIRAÇÃO. MUITAS POSSIBILIDADES.</span>
             <h2>
-              Qual é a cara da <span>sua ideia?</span>
+              Landing pages com <span>identidade.</span>
             </h2>
-            <p>Explore as referências. Escolha um ponto de partida. A gente faz do seu jeito.</p>
+            <p>Abra os modelos para conhecer a página completa.</p>
           </div>
           <Link className="text-link" to="/catalogo">
             Ver catálogo completo <ArrowUpRight size={18} />
           </Link>
         </div>
-        <div className="category-pills">
-          {categories.slice(0, 7).map((c, i) => (
-            <Link
-              className={i === 0 ? 'active' : ''}
-              key={c}
-              to={i === 0 ? '/catalogo' : `/catalogo?categoria=${encodeURIComponent(c)}`}
-            >
-              {i === 0 ? <LayoutIcon /> : null}
-              {c === 'Todos' ? 'Todos os modelos' : c}
-            </Link>
-          ))}
-        </div>
-        <LaptopShowcase
-          systems={feature.length ? feature : visible}
-          label="Conheça nossos modelos no laptop"
-        />
-        <div className="catalog-note">
-          <Sparkles size={17} />
-          <p>Não encontrou sua ideia? Também criamos projetos do zero.</p>
-          <Link to="/solicitar">
-            Conte pra gente <ArrowUpRight size={16} />
-          </Link>
-        </div>
+        <LaptopShowcase systems={visible} label="Conheça nossos modelos no laptop" />
       </section>
       <AboutSection />
       <section className="process-section" id="como-funciona">
@@ -337,7 +308,4 @@ export default function Home() {
       </section>
     </>
   );
-}
-function LayoutIcon() {
-  return <span aria-hidden="true">▦</span>;
 }

@@ -13,33 +13,6 @@
 .catalog-presentation-title p {
   margin-top: 14px;
 }
-.catalog-conversation {
-  margin-top: 35px;
-  padding: 27px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  border: 1px solid #37466c;
-  background: linear-gradient(100deg, #171d3c, #112b41);
-  border-radius: 14px;
-}
-.catalog-conversation > svg {
-  color: #ab94f5;
-  flex-shrink: 0;
-}
-.catalog-conversation > div {
-  flex: 1;
-}
-.catalog-conversation h3 {
-  font-size: 22px;
-}
-.catalog-conversation p {
-  font-size: 15px;
-  margin-top: 7px;
-}
-.catalog-conversation .button {
-  white-space: nowrap;
-}
 .laptop-showcase {
   isolation: isolate;
   position: relative;
@@ -219,85 +192,6 @@
   width: 27px;
   background: #5edfeb;
   box-shadow: 0 0 14px #48d4f34d;
-}
-.showcase-info {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 65px;
-  align-items: center;
-  max-width: 980px;
-  margin: 35px auto 0;
-  padding: 30px 0 0;
-  border-top: 1px solid #2a4260;
-}
-.showcase-index {
-  font:
-    700 14px/1.5 Manrope,
-    sans-serif;
-  letter-spacing: 1px;
-  color: #68d7ed;
-  display: inline-block;
-  margin-right: 20px;
-}
-.showcase-index > span {
-  font-size: 12px;
-  color: #768ea9;
-}
-.showcase-category {
-  font-size: 12px;
-  font-weight: 650;
-  letter-spacing: 0.4px;
-  color: #beaaf5;
-}
-.showcase-info h3 {
-  font-size: 34px;
-  letter-spacing: -1px;
-  margin: 13px 0 12px;
-}
-.showcase-info p {
-  font-size: 16px;
-  line-height: 1.8;
-}
-.showcase-detail {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-}
-.showcase-features {
-  display: flex;
-  gap: 8px 18px;
-  flex-wrap: wrap;
-  margin-bottom: 23px;
-}
-.showcase-features > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: #adbed6;
-  font-size: 13px;
-  line-height: 1.5;
-}
-.showcase-features svg {
-  color: #79dcc8;
-  flex-shrink: 0;
-}
-.showcase-details-link {
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #adc1dc;
-  margin-top: 15px;
-}
-.showcase-details-link:hover {
-  color: #86dfed;
-}
-.section .showcase-disclaimer {
-  font-size: 12px;
-  color: #849db8;
-  text-align: center;
-  margin: 26px auto 0;
-  max-width: 780px;
 }
 .about-section {
   display: grid;
@@ -794,16 +688,6 @@
   }
 }
 @media (max-width: 1100px) {
-  .showcase-info {
-    gap: 35px;
-    padding-inline: 18px;
-  }
-  .showcase-info h3 {
-    font-size: 30px;
-  }
-  .showcase-features {
-    gap: 8px 14px;
-  }
   .about-section {
     gap: 55px;
   }
@@ -880,35 +764,11 @@
   .laptop-display {
     aspect-ratio: 16/10;
   }
-  .showcase-info {
-    gap: 25px;
-    padding-inline: 0;
-  }
-  .showcase-info h3 {
-    font-size: 28px;
-  }
-  .showcase-features {
-    margin-bottom: 19px;
-  }
-  .showcase-features > span {
-    font-size: 12px;
-  }
-  .showcase-info .button {
-    font-size: 13px;
-    padding: 15px 16px;
-  }
   .catalog-presentation-title h1 {
     font-size: 33px;
   }
   .catalog-presentation-title p {
     font-size: 15px;
-  }
-  .catalog-conversation {
-    flex-wrap: wrap;
-    padding: 24px;
-  }
-  .catalog-conversation > .button {
-    margin-left: 46px;
   }
   .about-section {
     grid-template-columns: 1fr;
@@ -993,24 +853,6 @@
   .catalog-presentation-title p {
     font-size: 15px;
   }
-  .catalog-conversation {
-    padding: 23px 20px;
-    gap: 15px;
-  }
-  .catalog-conversation > svg {
-    display: none;
-  }
-  .catalog-conversation > div {
-    flex-basis: 100%;
-  }
-  .catalog-conversation h3 {
-    font-size: 23px;
-    line-height: 1.4;
-  }
-  .catalog-conversation > .button {
-    margin-left: 0;
-    font-size: 15px;
-  }
   .laptop-stage {
     padding: 12px 0 6px;
     margin-top: 16px;
@@ -1044,26 +886,6 @@
   .laptop-foot {
     height: 3px;
   }
-  .laptop-display .photo-browser {
-    height: 22px;
-    padding: 0 8px;
-    font-size: 5px;
-    gap: 5px;
-  }
-  .laptop-display .photo-scene {
-    height: calc(100% - 22px);
-  }
-  .laptop-display .photo-browser > svg {
-    width: 8px;
-    height: 8px;
-  }
-  .laptop-display .browser-dots {
-    gap: 3px;
-  }
-  .laptop-display .browser-dots i {
-    width: 3px;
-    height: 3px;
-  }
   .showcase-controls {
     gap: 10px;
     margin: 23px 0 18px;
@@ -1092,51 +914,6 @@
   }
   .carousel-dots > button.active > span {
     width: 20px;
-  }
-  .showcase-info {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 23px;
-    padding-top: 25px;
-    margin-top: 22px;
-  }
-  .showcase-info h3 {
-    font-size: 31px;
-    margin: 12px 0;
-  }
-  .showcase-info p {
-    font-size: 16px;
-  }
-  .showcase-index {
-    font-size: 13px;
-    margin-right: 17px;
-  }
-  .showcase-category {
-    font-size: 12px;
-  }
-  .showcase-features {
-    gap: 10px 15px;
-    margin-bottom: 22px;
-  }
-  .showcase-features > span {
-    font-size: 13px;
-  }
-  .showcase-info .button {
-    width: 100%;
-    font-size: 15px;
-    padding: 17px;
-  }
-  .showcase-detail {
-    align-items: stretch;
-  }
-  .showcase-details-link {
-    font-size: 14px;
-    align-self: center;
-  }
-  .section .showcase-disclaimer {
-    font-size: 12px;
-    line-height: 1.8;
-    margin-top: 23px;
-    text-align: left;
   }
   .about-section {
     gap: 25px;

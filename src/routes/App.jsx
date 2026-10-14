@@ -13,9 +13,11 @@ import Terms from '../pages/Terms';
 import NotFound from '../pages/NotFound';
 import VerifyEmail from '../pages/VerifyEmail';
 import Credits from '../pages/Credits';
+import LandingDemo from '../pages/LandingDemo';
 export default function App() {
   return (
     <Routes>
+      <Route path="modelos/:id" element={<LandingDemo />} />
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="catalogo" element={<Catalog />} />

@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Check, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { safeUrl } from '../../services/api';
 import Preview from './Preview';
 
-export default function LaptopShowcase({
-  systems,
-  compact = false,
-  label = 'Apresentação dos sistemas',
-}) {
+export default function LaptopShowcase({ systems, label = 'Apresentação dos sistemas' }) {
   const items = systems.filter((s) => s.published);
   const [selected, setSelected] = useState(null);
   const [playing, setPlaying] = useState(false);
@@ -59,7 +56,7 @@ export default function LaptopShowcase({
   };
   return (
     <section
-      className={`laptop-showcase ${compact ? 'compact' : ''}`}
+      className="laptop-showcase"
       role="region"
       aria-label={label}
       aria-roledescription="carrossel"
@@ -99,11 +96,8 @@ export default function LaptopShowcase({
           <div className="laptop-camera" aria-hidden="true" />
           <div className="laptop-display" aria-live={running ? 'off' : 'polite'} aria-atomic="true">
             <div className="laptop-slide" key={system.id}>
-              <Preview system={system} large />
+              <Preview system={system} large live />
             </div>
-          </div>
-          <div className="laptop-chin" aria-hidden="true">
-            SITEFLOW
           </div>
         </div>
         <div className="laptop-base" aria-hidden="true">
@@ -156,39 +150,25 @@ export default function LaptopShowcase({
           </button>
         )}
       </div>
-      <div className="showcase-info">
+      <div className="landing-showcase-caption">
         <div>
-          <span className="showcase-index">
-            {String(index + 1).padStart(2, '0')}{' '}
-            <span>/ {String(items.length).padStart(2, '0')}</span>
-          </span>
-          <span className="showcase-category">{system.category}</span>
+          <span>{system.category}</span>
           <h3>{system.name}</h3>
-          <p>{system.description}</p>
         </div>
-        <div className="showcase-detail">
-          <div className="showcase-features">
-            {system.features.slice(0, 3).map((feature) => (
-              <span key={feature}>
-                <Check size={15} />
-                {feature}
-              </span>
-            ))}
-          </div>
+        <div className="landing-showcase-actions">
+          <a
+            className="button button-outline"
+            href={safeUrl(system.demoUrl) || `/modelos/${system.id}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Abrir landing page <ExternalLink size={16} />
+          </a>
           <Link className="button button-primary" to={`/solicitar?modelo=${system.id}`}>
             Quero um projeto assim <ArrowUpRight size={17} />
           </Link>
-          <Link className="showcase-details-link" to={`/catalogo/${system.id}`}>
-            Conhecer este modelo <ArrowUpRight size={15} />
-          </Link>
         </div>
       </div>
-      {!compact && (
-        <p className="showcase-disclaimer">
-          Referências personalizáveis do catálogo. Demonstrações reais podem ser acessadas na página
-          de cada sistema quando cadastradas.
-        </p>
-      )}
     </section>
   );
 }

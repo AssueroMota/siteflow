@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import { Monitor, Tablet, Smartphone, ArrowLeft, ExternalLink } from 'lucide-react';
 import { usePlatform } from '../contexts/PlatformContext';
 import { safeUrl } from '../services/api';
-import Preview from '../components/ui/Preview';
 import NotFound from './NotFound';
 export default function Demo() {
   const { id } = useParams();
@@ -42,25 +41,24 @@ export default function Demo() {
       <p className="demo-notice">
         {url
           ? 'Demonstração externa cadastrada pela equipe.'
-          : 'Conceito de site com fotografia real. As funcionalidades do seu projeto são definidas na proposta.'}
+          : 'Landing page demonstrativa. O envio de formulários é simulado.'}
       </p>
       <div className={`demo-viewport ${device}`}>
-        {url ? (
-          <iframe
-            title={`Demonstração ${s.name}`}
-            src={url}
-            sandbox="allow-scripts allow-forms allow-same-origin"
-            referrerPolicy="no-referrer"
-          />
-        ) : (
-          <Preview system={s} large />
-        )}
+        <iframe
+          title={`Demonstração ${s.name}`}
+          src={url || `/modelos/${s.id}?embed=1`}
+          sandbox="allow-scripts allow-forms allow-same-origin"
+          referrerPolicy="no-referrer"
+        />
       </div>
-      {url && (
-        <a href={url} className="text-link demo-external" target="_blank" rel="noreferrer">
-          Abrir demonstração em outra aba <ExternalLink size={16} />
-        </a>
-      )}
+      <a
+        href={url || `/modelos/${s.id}`}
+        className="text-link demo-external"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Abrir landing page em outra aba <ExternalLink size={16} />
+      </a>
     </div>
   );
 }

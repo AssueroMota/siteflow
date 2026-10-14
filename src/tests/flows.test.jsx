@@ -17,18 +17,18 @@ function mount(path) {
 test('catálogo abre direto na vitrine e mantém acesso às categorias por link', async () => {
   const user = userEvent.setup();
   let view = mount('/catalogo');
-  expect(document.querySelectorAll('.system-card').length).toBe(9);
+  expect(screen.getAllByRole('button', { name: /^Mostrar / }).length).toBe(9);
   expect(screen.queryByRole('textbox', { name: 'Buscar modelos' })).toBeNull();
   expect(screen.queryByText('Encontre inspiração.')).toBeNull();
   view.unmount();
   view = mount('/catalogo?categoria=Barbearias');
-  expect(document.querySelectorAll('.system-card').length).toBe(1);
-  expect(screen.getByRole('link', { name: 'Barber Studio', exact: true })).toBeTruthy();
+  expect(screen.getAllByRole('button', { name: /^Mostrar / }).length).toBe(1);
+  expect(screen.getByRole('heading', { name: 'Barber Studio', exact: true })).toBeTruthy();
   view.unmount();
   mount('/catalogo?q=inexistente');
   expect(screen.getByText('A sua ideia pode ser a próxima.')).toBeTruthy();
   await user.click(screen.getByRole('button', { name: 'Limpar filtros' }));
-  expect(document.querySelectorAll('.system-card').length).toBe(9);
+  expect(screen.getAllByRole('button', { name: /^Mostrar / }).length).toBe(9);
 });
 test('solicitação demo é salva, aparece no painel e pode avançar de etapa no admin', async () => {
   const user = userEvent.setup();
@@ -69,8 +69,8 @@ test('edição de referência persiste e rascunho sai do catálogo público', as
   await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
   view.unmount();
   mount('/catalogo');
-  expect(screen.queryByRole('link', { name: /Barbearia Personalizada/ })).toBeNull();
-  expect(document.querySelectorAll('.system-card').length).toBe(8);
+  expect(screen.queryByRole('button', { name: /Mostrar Barbearia Personalizada/ })).toBeNull();
+  expect(screen.getAllByRole('button', { name: /^Mostrar / }).length).toBe(8);
 });
 test('mensalidade é única, configurável e não oferece compra de templates', async () => {
   const user = userEvent.setup();

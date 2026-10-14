@@ -287,20 +287,6 @@ p,
 .top-label svg {
   color: #6ceeff;
 }
-.hero-mini-preview {
-  position: absolute;
-  left: -28px;
-  top: 175px;
-  width: 285px;
-  border: 5px solid #122540;
-  border-radius: 13px;
-  box-shadow:
-    0 18px 40px #0008,
-    0 0 30px #38e2ff15;
-  transform: rotate(-8deg);
-  overflow: hidden;
-  z-index: 2;
-}
 .bottom-label {
   bottom: 0;
   left: 85px;
@@ -315,20 +301,6 @@ p,
   background: #42e1c0;
   border-color: #1c4e50;
   box-shadow: 0 0 18px #2fe0ba45;
-}
-.hero-cursor {
-  color: #8ff3ff;
-  top: 375px;
-  left: 30px;
-  z-index: 4;
-}
-.cursor-name {
-  background: #34d1eb;
-  color: #06182e;
-  font-size: 11px;
-  top: 411px;
-  left: 56px;
-  padding: 7px 11px;
 }
 .promise-strip {
   background: linear-gradient(90deg, #091931, #0e2141, #0a1931);
@@ -500,189 +472,6 @@ p,
 }
 .catalog-note a {
   color: #71e5f6;
-}
-.preview.photo-preview {
-  color: white;
-  background: #08121d;
-  aspect-ratio: 1.5;
-  border-radius: 0;
-  container-type: inline-size;
-}
-.photo-preview.large {
-  aspect-ratio: 1.7;
-}
-.photo-browser {
-  height: 34px;
-  padding: 0 14px;
-  background: #0a172b;
-  color: #a1b7d2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 9px;
-  letter-spacing: 1px;
-}
-.browser-dots {
-  display: flex;
-  gap: 5px;
-}
-.browser-dots i {
-  width: 5px;
-  height: 5px;
-  background: #5e728d;
-  border-radius: 50%;
-}
-.browser-dots i:first-child {
-  background: #ff6c85;
-}
-.browser-dots i:nth-child(2) {
-  background: #efc66b;
-}
-.browser-dots i:nth-child(3) {
-  background: #55d6bd;
-}
-.photo-scene {
-  position: relative;
-  height: calc(100% - 34px);
-  overflow: hidden;
-}
-.scene-photo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s;
-}
-.system-card:hover .scene-photo {
-  transform: scale(1.045);
-}
-.photo-shade {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, #030d1be8, #030d1b72 65%, #030d1b38),
-    linear-gradient(0deg, #020b1d9c, transparent 50%);
-}
-.photo-site-header {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6% 7% 0;
-}
-.photo-site-header > b {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 3cqw;
-  color: #fff;
-  font-family: Manrope, sans-serif;
-  letter-spacing: -0.2px;
-}
-.photo-site-header > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 2.1cqw;
-  color: #dce5ed;
-}
-.photo-site-copy {
-  position: absolute;
-  left: 7%;
-  right: 5%;
-  top: 33%;
-}
-.photo-kicker {
-  font-size: 2.1cqw;
-  color: #82f0f8;
-  letter-spacing: 1.8px;
-  font-weight: 700;
-}
-.photo-site-copy h3 {
-  color: white;
-  font:
-    750 6.9cqw/1.14 Manrope,
-    sans-serif;
-  letter-spacing: -0.2cqw;
-  margin-top: 3%;
-  text-shadow: 0 3px 20px #0008;
-}
-.photo-site-copy h3 em {
-  font-family: Georgia, serif;
-  font-weight: 500;
-  font-style: italic;
-  color: #d4effc;
-}
-.photo-site-cta {
-  display: inline-flex;
-  gap: 7px;
-  align-items: center;
-  margin-top: 5%;
-  background: #e6f9f4;
-  color: #102d31;
-  padding: 2.8% 4.3%;
-  font-size: 2.3cqw;
-  font-weight: 700;
-  border-radius: 3px;
-}
-.photo-site-footer {
-  position: absolute;
-  bottom: 6%;
-  left: 7%;
-  right: 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.65cqw;
-  letter-spacing: 0.5px;
-  color: #dde8f3;
-}
-.photo-barber .photo-shade {
-  background:
-    linear-gradient(90deg, #140d08e0, #140d0877 70%, #140d0844),
-    linear-gradient(0deg, #110d09b0, transparent);
-}
-.photo-barber .photo-kicker {
-  color: #e9be84;
-}
-.photo-barber .photo-site-copy h3 em {
-  color: #ffd7a4;
-}
-.photo-barber .photo-site-cta {
-  background: #d6a56d;
-}
-.photo-restaurant .photo-shade {
-  background: linear-gradient(90deg, #051811e3, #05181177 70%, #05181133);
-}
-.photo-restaurant .photo-kicker,
-.photo-restaurant .photo-site-copy h3 em {
-  color: #f4d6a7;
-}
-.photo-restaurant .photo-site-cta {
-  background: #f2d7ae;
-}
-.photo-store .photo-shade {
-  background: linear-gradient(90deg, #171224d9, #21132877 65%, #21132833);
-}
-.photo-store .scene-photo {
-  object-position: 65% 50%;
-}
-.photo-store .photo-site-copy h3 em {
-  color: #f4cdeb;
-}
-.photo-clinic .photo-shade,
-.photo-agenda .photo-shade {
-  background: linear-gradient(90deg, #043e46eb, #073741a0 60%, #062a3377);
-}
-.photo-clinic .scene-photo,
-.photo-agenda .scene-photo {
-  object-position: 75% 40%;
-}
-.photo-workspace .photo-shade,
-.photo-agency .photo-shade {
-  background: linear-gradient(90deg, #10153ce0, #12173b77 65%, #12173b33);
 }
 .preview-image {
   border-radius: 0;
@@ -1088,36 +877,6 @@ p,
   background: #0b1d35;
   border: 1px solid #45688d;
   box-shadow: 0 20px 60px #0005;
-}
-.demo-viewport.mobile .photo-preview {
-  aspect-ratio: 0.62;
-}
-.demo-viewport.mobile .photo-site-header {
-  padding-top: 8%;
-}
-.demo-viewport.mobile .photo-site-header b {
-  font-size: 4cqw;
-}
-.demo-viewport.mobile .photo-site-header > span {
-  display: none;
-}
-.demo-viewport.mobile .photo-site-copy {
-  top: 36%;
-}
-.demo-viewport.mobile .photo-site-copy h3 {
-  font-size: 10cqw;
-  line-height: 1.2;
-}
-.demo-viewport.mobile .photo-kicker {
-  font-size: 3cqw;
-}
-.demo-viewport.mobile .photo-site-cta {
-  font-size: 3.7cqw;
-  padding: 5% 6%;
-  margin-top: 9%;
-}
-.demo-viewport.mobile .photo-site-footer {
-  font-size: 2.2cqw;
 }
 .pricing-layout {
   max-width: 1120px;
@@ -1575,16 +1334,6 @@ td {
   .hero-visual-neon {
     height: 600px;
   }
-  .hero-mini-preview {
-    width: 310px;
-    top: 185px;
-  }
-  .hero-cursor {
-    top: 405px;
-  }
-  .cursor-name {
-    top: 441px;
-  }
 }
 @media (max-width: 1100px) {
   .header-inner {
@@ -1643,11 +1392,6 @@ td {
   .hero-photo {
     left: 15px;
   }
-  .hero-mini-preview {
-    width: 240px;
-    left: -18px;
-    top: 165px;
-  }
   .floating-label {
     font-size: 12px;
     padding: 13px;
@@ -1659,14 +1403,6 @@ td {
   .bottom-label {
     left: 35px;
     bottom: 0;
-  }
-  .hero-cursor {
-    top: 345px;
-    left: 12px;
-  }
-  .cursor-name {
-    top: 380px;
-    left: 30px;
   }
   .hero-photo figcaption {
     left: 25px;
@@ -1794,11 +1530,6 @@ td {
     left: 60px;
     right: 15px;
   }
-  .hero-mini-preview {
-    width: 300px;
-    left: 0;
-    top: 165px;
-  }
   .hero-photo figcaption {
     left: 35px;
   }
@@ -1813,14 +1544,6 @@ td {
   }
   .bottom-label {
     left: 135px;
-  }
-  .hero-cursor {
-    top: 365px;
-    left: 35px;
-  }
-  .cursor-name {
-    top: 400px;
-    left: 60px;
   }
   .card-grid,
   .catalog-grid {
@@ -1861,15 +1584,6 @@ td {
   }
   .card-category > span {
     font-size: 10px;
-  }
-  .photo-browser {
-    height: 29px;
-    font-size: 7px;
-    padding-inline: 10px;
-    letter-spacing: 0.5px;
-  }
-  .photo-scene {
-    height: calc(100% - 29px);
   }
   .service-section {
     grid-template-columns: 1fr;
@@ -2119,13 +1833,6 @@ td {
     font-size: 8px;
     letter-spacing: 1px;
   }
-  .hero-mini-preview {
-    left: 0;
-    top: 148px;
-    width: 220px;
-    border-width: 4px;
-    border-radius: 10px;
-  }
   .floating-label {
     font-size: 11px;
     padding: 12px;
@@ -2144,16 +1851,6 @@ td {
   }
   .bottom-label small {
     font-size: 11px;
-  }
-  .hero-cursor {
-    width: 26px;
-    left: 8px;
-    top: 305px;
-  }
-  .cursor-name {
-    font-size: 10px;
-    left: 30px;
-    top: 335px;
   }
   .promise-strip {
     gap: 18px 22px;
@@ -2234,30 +1931,6 @@ td {
   .catalog-grid .card-bottom a {
     font-size: 13px;
     gap: 5px;
-  }
-  .photo-browser {
-    height: 32px;
-    font-size: 8px;
-    padding-inline: 12px;
-  }
-  .photo-scene {
-    height: calc(100% - 32px);
-  }
-  .hero-mini-preview .photo-browser {
-    height: 22px;
-    font-size: 5px;
-    gap: 4px;
-    padding-inline: 7px;
-  }
-  .hero-mini-preview .browser-dots {
-    gap: 3px;
-  }
-  .hero-mini-preview .browser-dots i {
-    width: 3px;
-    height: 3px;
-  }
-  .hero-mini-preview .photo-scene {
-    height: calc(100% - 22px);
   }
   .featured-badge {
     font-size: 11px;

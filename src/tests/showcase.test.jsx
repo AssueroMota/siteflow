@@ -21,6 +21,12 @@ test('carrossel no laptop troca modelos, preserva referência no CTA e acompanha
   const carousel = screen.getByRole('region', { name: 'Vitrine de sistemas do catálogo' });
   await user.click(within(carousel).getByRole('button', { name: 'Mostrar Bistrô & Co.' }));
   expect(within(carousel).getByRole('heading', { name: 'Bistrô & Co.' })).toBeTruthy();
+  expect(within(carousel).getByTitle('Landing page Bistrô & Co.').getAttribute('src')).toBe(
+    '/modelos/bistro?embed=1',
+  );
+  expect(
+    within(carousel).getByRole('link', { name: 'Abrir landing page' }).getAttribute('href'),
+  ).toBe('/modelos/bistro');
   expect(
     within(carousel).getByRole('link', { name: 'Quero um projeto assim' }).getAttribute('href'),
   ).toBe('/solicitar?modelo=bistro');
