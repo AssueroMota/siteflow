@@ -1,10 +1,13 @@
 import LandingPage from '../landing/LandingPage';
 import LivePreview from '../landing/LivePreview';
-export default function Preview({ system, large = false, live = false }) {
+export default function Preview({ system, large = false, live = false, decorative = false }) {
   if (live && !system.imageUrl) return <LivePreview system={system} />;
   if (system.imageUrl)
     return (
-      <div className={`preview preview-image ${large ? 'large' : ''}`}>
+      <div
+        className={`preview preview-image ${large ? 'large' : ''}`}
+        aria-hidden={decorative ? true : undefined}
+      >
         <img
           src={system.imageUrl}
           alt={`Landing page ${system.name}`}
@@ -17,6 +20,7 @@ export default function Preview({ system, large = false, live = false }) {
     <div
       className={`preview landing-page-preview ${large ? 'large' : ''}`}
       aria-label={`Prévia da landing page ${system.name}`}
+      aria-hidden={decorative ? true : undefined}
     >
       <LandingPage system={system} />
     </div>

@@ -14,25 +14,28 @@ import NotFound from '../pages/NotFound';
 import VerifyEmail from '../pages/VerifyEmail';
 import Credits from '../pages/Credits';
 import LandingDemo from '../pages/LandingDemo';
+import { CatalogModalProvider } from '../contexts/CatalogModalContext';
 export default function App() {
   return (
-    <Routes>
-      <Route path="modelos/:id" element={<LandingDemo />} />
-      <Route element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="catalogo" element={<Catalog />} />
-        <Route path="catalogo/:id" element={<Details />} />
-        <Route path="demo/:id" element={<Demo />} />
-        <Route path="mensalidade" element={<Pricing />} />
-        <Route path="solicitar" element={<Request />} />
-        <Route path="entrar" element={<Auth />} />
-        <Route path="confirmar-email" element={<VerifyEmail />} />
-        <Route path="painel" element={<Dashboard />} />
-        <Route path="admin" element={<Admin />} />
-        <Route path="termos" element={<Terms />} />
-        <Route path="creditos" element={<Credits />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+    <CatalogModalProvider>
+      <Routes>
+        <Route path="modelos/:id" element={<LandingDemo />} />
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="catalogo" element={<Catalog />} />
+          <Route path="catalogo/:id" element={<Details />} />
+          <Route path="demo/:id" element={<Demo />} />
+          <Route path="mensalidade" element={<Pricing />} />
+          <Route path="solicitar" element={<Request />} />
+          <Route path="entrar" element={<Auth />} />
+          <Route path="confirmar-email" element={<VerifyEmail />} />
+          <Route path="painel" element={<Dashboard />} />
+          <Route path="admin" element={<Admin />} />
+          <Route path="termos" element={<Terms />} />
+          <Route path="creditos" element={<Credits />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </CatalogModalProvider>
   );
 }

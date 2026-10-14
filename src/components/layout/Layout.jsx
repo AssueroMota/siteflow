@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Zap, Menu, X, CheckCircle2 } from 'lucide-react';
 import { usePlatform } from '../../contexts/PlatformContext';
+import { useCatalogModal } from '../../contexts/CatalogModalContext';
 export function Logo() {
   return (
     <Link to="/" className="logo" aria-label="SiteFlow início">
@@ -16,6 +17,7 @@ export default function Layout() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const { demo, user, toast, error, loading } = usePlatform();
+  const { openCatalog, catalogOpen } = useCatalogModal();
   useEffect(() => {
     setOpen(false);
     if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
@@ -44,7 +46,15 @@ export default function Layout() {
             <NavLink end to="/">
               Início
             </NavLink>
-            <NavLink to="/catalogo">Explore o catálogo</NavLink>
+            <button
+              type="button"
+              className="nav-catalog-trigger"
+              onClick={openCatalog}
+              aria-haspopup="dialog"
+              aria-expanded={catalogOpen}
+            >
+              Explore o catálogo
+            </button>
             <Link to="/#quem-somos">Quem somos</Link>
             <Link to="/#como-funciona">Como funciona</Link>
             <NavLink to="/mensalidade">Mensalidade</NavLink>
@@ -90,7 +100,15 @@ export default function Layout() {
           </div>
           <div>
             <b>Explore</b>
-            <Link to="/catalogo">Catálogo de inspirações</Link>
+            <button
+              type="button"
+              className="footer-catalog-trigger"
+              onClick={openCatalog}
+              aria-haspopup="dialog"
+            >
+              Catálogo de inspirações
+            </button>
+            <Link to="/#o-que-recebe">O que você recebe</Link>
             <Link to="/mensalidade">Manutenção mensal</Link>
             <Link to="/solicitar">Solicitar um projeto</Link>
           </div>

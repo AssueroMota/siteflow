@@ -22,6 +22,9 @@ O preço inicial de **R$ 149/mês é ilustrativo**, editável no painel. A empre
 ## O que está implementado
 
 - Homepage comercial, benefícios, etapas, oferta mensal e perguntas frequentes.
+- Entradas animadas pela esquerda, direita, cima e baixo, ativadas ao rolar a página. O conteúdo permanece acessível sem IntersectionObserver e com redução de movimento habilitada.
+- “Ver catálogo completo”, o botão do hero e a navegação abrem um modal com todos os modelos publicados, busca, segmento, abertura de landing pages e seleção para o briefing. O modal prende o foco, fecha com Esc e devolve o foco ao botão de origem.
+- Seção de entregas com abas para criação, manutenção mensal e pontos definidos na proposta, além de um checklist para iniciar o projeto.
 - Vitrine com landing pages navegáveis dentro de um laptop, setas, indicadores e pausa da apresentação automática. Os modelos completos abrem também em uma página independente.
 - Apresentação direta no carrossel, com nome e duas ações. As páginas completas substituem as capas antigas, sem metadados de “conceito de site” nem grade repetida dos mesmos projetos.
 - Seções “Quem somos”, experiências de clientes e caminhos de contato para criar ou melhorar um projeto.

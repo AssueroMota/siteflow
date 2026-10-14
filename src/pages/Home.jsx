@@ -10,7 +10,6 @@ import {
   Rocket,
   Paintbrush,
   MessageSquare,
-  Monitor,
   Smartphone,
 } from 'lucide-react';
 import { photos } from '../data/photography';
@@ -21,13 +20,17 @@ import AboutSection from '../components/home/AboutSection';
 import TrustSection from '../components/home/TrustSection';
 import LeadSection from '../components/home/LeadSection';
 import FAQ from '../components/ui/FAQ';
+import Reveal from '../components/ui/Reveal';
+import DeliverablesSection from '../components/home/DeliverablesSection';
+import { useCatalogModal } from '../contexts/CatalogModalContext';
 export default function Home() {
   const { systems, offer, demo } = usePlatform();
+  const { openCatalog, catalogOpen } = useCatalogModal();
   const visible = systems.filter((s) => s.published);
   return (
     <>
       <section className="hero section">
-        <div className="hero-copy">
+        <Reveal direction="left" className="hero-copy">
           <span className="pill">
             <span /> GRANDES IDEIAS MERECEM SAIR DO PAPEL
           </span>
@@ -50,9 +53,15 @@ export default function Home() {
             <Link to="/solicitar" className="button button-primary">
               Vamos criar meu projeto <ArrowUpRight size={19} />
             </Link>
-            <Link to="/catalogo" className="button button-outline">
+            <button
+              type="button"
+              onClick={openCatalog}
+              aria-haspopup="dialog"
+              aria-expanded={catalogOpen}
+              className="button button-outline"
+            >
               Explorar catálogo <ArrowRight size={17} />
-            </Link>
+            </button>
           </div>
           <div className="hero-checks">
             <span>
@@ -62,8 +71,8 @@ export default function Home() {
               <Check size={15} /> Manutenção mensal
             </span>
           </div>
-        </div>
-        <div className="hero-visual hero-visual-neon">
+        </Reveal>
+        <Reveal direction="right" delay={140} className="hero-visual hero-visual-neon">
           <figure className="hero-photo">
             <img
               src={photos.studio.path}
@@ -92,9 +101,9 @@ export default function Home() {
             </div>
             <ArrowUpRight size={19} />
           </div>
-        </div>
+        </Reveal>
       </section>
-      <section className="promise-strip">
+      <Reveal as="section" direction="down" className="promise-strip">
         <span>
           <Code2 /> Sites & sistemas
         </span>
@@ -110,23 +119,33 @@ export default function Home() {
         <span>
           <ShieldCheck /> Manutenção contínua
         </span>
-      </section>
+      </Reveal>
       <section className="section showcase" id="catalogo">
-        <div className="section-heading">
+        <Reveal direction="down" className="section-heading">
           <div>
             <h2>
               Landing pages com <span>identidade.</span>
             </h2>
             <p>Abra os modelos para conhecer a página completa.</p>
           </div>
-          <Link className="text-link" to="/catalogo">
+          <button
+            type="button"
+            className="text-link"
+            onClick={openCatalog}
+            aria-haspopup="dialog"
+            aria-expanded={catalogOpen}
+          >
             Ver catálogo completo <ArrowUpRight size={18} />
-          </Link>
-        </div>
-        <LaptopShowcase systems={visible} label="Conheça nossos modelos no laptop" />
+          </button>
+        </Reveal>
+        <Reveal direction="up">
+          <LaptopShowcase systems={visible} label="Conheça nossos modelos no laptop" />
+        </Reveal>
       </section>
-      <AboutSection />
-      <section className="process-section" id="como-funciona">
+      <Reveal direction="left">
+        <AboutSection />
+      </Reveal>
+      <Reveal as="section" direction="up" className="process-section" id="como-funciona">
         <div className="section">
           <div className="section-heading">
             <div>
@@ -168,8 +187,13 @@ export default function Home() {
                 'A gente continua junto',
                 'A mensalidade mantém o projeto com manutenção e suporte conforme sua proposta.',
               ],
-            ].map(([Icon, n, t, d]) => (
-              <div className="process-card" key={n}>
+            ].map(([Icon, n, t, d], index) => (
+              <Reveal
+                direction={['left', 'up', 'down', 'right'][index]}
+                delay={index * 70}
+                className="process-card"
+                key={n}
+              >
                 <div>
                   <span className="process-icon">
                     <Icon size={23} />
@@ -178,90 +202,20 @@ export default function Home() {
                 </div>
                 <h3>{t}</h3>
                 <p>{d}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
-      <section className="section service-section">
-        <div className="service-art">
-          <img
-            className="service-photo"
-            src={photos.development.path}
-            alt={photos.development.alt}
-            loading="lazy"
-            width={1400}
-            height={934}
-          />
-          <span className="service-sticker">É sobre o seu negócio.</span>
-          <div className="service-window">
-            <div>
-              <span />
-              <span />
-              <span />
-            </div>
-            <Code2 size={54} />
-            <h3>
-              Uma ideia.
-              <br />
-              Infinitas possibilidades<span>.</span>
-            </h3>
-            <div className="service-tags">
-              <span>Design</span>
-              <span>Desenvolvimento</span>
-              <span>Cuidado</span>
-            </div>
-          </div>
-          <div className="service-mini">
-            <Monitor size={25} />
-            <b>Pronto para crescer com você</b>
-            <ArrowUpRight />
-          </div>
-          <span className="service-star">✳</span>
-        </div>
-        <div>
-          <span className="eyebrow">SEU NEGÓCIO NÃO É UM MOLDE</span>
-          <h2>
-            Por que seu site
-            <br />
-            deveria <span>ser?</span>
-          </h2>
-          <p className="body-large">
-            O catálogo inspira. A sua necessidade guia. Criamos uma experiência que faz sentido para
-            quem você é e para onde quer chegar.
-          </p>
-          <div className="benefit-list">
-            <div>
-              <Paintbrush />
-              <span>
-                <b>A sua identidade em cada detalhe</b>
-                <p>Cores, conteúdo e estrutura pensados para sua marca.</p>
-              </span>
-            </div>
-            <div>
-              <Code2 />
-              <span>
-                <b>Funcionalidades com propósito</b>
-                <p>O que seu negócio precisa, definido em conjunto.</p>
-              </span>
-            </div>
-            <div>
-              <Headphones />
-              <span>
-                <b>Uma equipe para continuar com você</b>
-                <p>Acompanhamento e manutenção após a entrega.</p>
-              </span>
-            </div>
-          </div>
-          <Link to="/solicitar" className="text-link">
-            Vamos falar sobre sua ideia <ArrowUpRight size={18} />
-          </Link>
-        </div>
-      </section>
-      <TrustSection />
-      <LeadSection />
+      </Reveal>
+      <DeliverablesSection />
+      <Reveal direction="up">
+        <TrustSection />
+      </Reveal>
+      <Reveal direction="right">
+        <LeadSection />
+      </Reveal>
       <section className="section">
-        <div className="offer-banner">
+        <Reveal direction="down" className="offer-banner">
           <div>
             <span className="eyebrow">CRIAÇÃO + CUIDADO CONTÍNUO</span>
             <h2>
@@ -293,10 +247,12 @@ export default function Home() {
               Entenda como funciona
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
-      <FAQ />
-      <section className="final-cta">
+      <Reveal direction="up">
+        <FAQ />
+      </Reveal>
+      <Reveal as="section" direction="up" className="final-cta">
         <span>O PRÓXIMO GRANDE PROJETO PODE SER O SEU</span>
         <h2>
           Vamos fazer <i>acontecer?</i>
@@ -305,7 +261,7 @@ export default function Home() {
           Conte sua ideia <ArrowUpRight size={19} />
         </Link>
         <span className="cta-star">✳</span>
-      </section>
+      </Reveal>
     </>
   );
 }

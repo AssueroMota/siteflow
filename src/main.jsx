@@ -7,6 +7,7 @@ import './styles/global.css';
 import './styles/neon.css';
 import './styles/marketing.css';
 import './styles/landing.css';
+import './styles/enhancements.css';
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
