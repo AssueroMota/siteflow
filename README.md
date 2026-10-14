@@ -23,7 +23,7 @@ O preço inicial de **R$ 149/mês é ilustrativo**, editável no painel. A empre
 
 - Homepage comercial, benefícios, etapas, oferta mensal e perguntas frequentes.
 - Vitrine com carrossel dentro de um laptop, navegação por setas, indicadores, teclado e gesto de arrastar; reprodução automática pode ser pausada e respeita redução de movimento.
-- Busca e ordenação alinhadas em um painel de filtros, com ícones e contagem por categoria. O carrossel acompanha os filtros aplicados.
+- Catálogo com entrada direta no carrossel do laptop, sem bloco de introdução ou painel de busca e filtros. Links de categorias da página inicial continuam funcionando.
 - Seções “Quem somos”, experiências de clientes e caminhos de contato para criar ou melhorar um projeto.
 - Cadastro de depoimentos no painel: rascunhos, autorização de publicação e exibição na página inicial. Nenhum depoimento fictício acompanha o projeto.
 - Nove referências visuais com categorias, busca e ordenação.

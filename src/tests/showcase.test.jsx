@@ -15,9 +15,9 @@ function mount(path) {
   );
 }
 
-test('carrossel no laptop troca modelos, preserva referência no CTA e acompanha filtros', async () => {
+test('carrossel no laptop troca modelos, preserva referência no CTA e acompanha categoria do link', async () => {
   const user = userEvent.setup();
-  mount('/catalogo');
+  const view = mount('/catalogo');
   const carousel = screen.getByRole('region', { name: 'Vitrine de sistemas do catálogo' });
   await user.click(within(carousel).getByRole('button', { name: 'Mostrar Bistrô & Co.' }));
   expect(within(carousel).getByRole('heading', { name: 'Bistrô & Co.' })).toBeTruthy();
@@ -26,9 +26,13 @@ test('carrossel no laptop troca modelos, preserva referência no CTA e acompanha
   ).toBe('/solicitar?modelo=bistro');
   await user.click(within(carousel).getByRole('button', { name: 'Próximo sistema' }));
   expect(within(carousel).getByRole('heading', { name: 'Lume Store' })).toBeTruthy();
-  await user.click(screen.getByRole('button', { name: 'Barbearias', exact: true }));
-  expect(within(carousel).getByRole('heading', { name: 'Barber Studio' })).toBeTruthy();
-  expect(within(carousel).getByRole('button', { name: 'Próximo sistema' }).disabled).toBe(true);
+  view.unmount();
+  mount('/catalogo?categoria=Barbearias');
+  const filteredCarousel = screen.getByRole('region', { name: 'Vitrine de sistemas do catálogo' });
+  expect(within(filteredCarousel).getByRole('heading', { name: 'Barber Studio' })).toBeTruthy();
+  expect(within(filteredCarousel).getByRole('button', { name: 'Próximo sistema' }).disabled).toBe(
+    true,
+  );
 });
 
 test('rascunho de depoimento não aparece; publicação exige autorização e persiste', async () => {

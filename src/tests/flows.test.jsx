@@ -14,14 +14,18 @@ function mount(path) {
     </MemoryRouter>,
   );
 }
-test('catálogo combina busca, categoria e ordenação e limpa resultado vazio', async () => {
+test('catálogo abre direto na vitrine e mantém acesso às categorias por link', async () => {
   const user = userEvent.setup();
-  mount('/catalogo');
+  let view = mount('/catalogo');
   expect(document.querySelectorAll('.system-card').length).toBe(9);
-  await user.click(screen.getByRole('button', { name: 'Barbearias', exact: true }));
+  expect(screen.queryByRole('textbox', { name: 'Buscar modelos' })).toBeNull();
+  expect(screen.queryByText('Encontre inspiração.')).toBeNull();
+  view.unmount();
+  view = mount('/catalogo?categoria=Barbearias');
   expect(document.querySelectorAll('.system-card').length).toBe(1);
   expect(screen.getByRole('link', { name: 'Barber Studio', exact: true })).toBeTruthy();
-  await user.type(screen.getByRole('textbox', { name: 'Buscar modelos' }), 'inexistente');
+  view.unmount();
+  mount('/catalogo?q=inexistente');
   expect(screen.getByText('A sua ideia pode ser a próxima.')).toBeTruthy();
   await user.click(screen.getByRole('button', { name: 'Limpar filtros' }));
   expect(document.querySelectorAll('.system-card').length).toBe(9);

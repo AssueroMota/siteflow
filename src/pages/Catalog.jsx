@@ -3,20 +3,13 @@ import { Link } from 'react-router-dom';
 import { Search, ArrowUpRight, Sparkles } from 'lucide-react';
 import { usePlatform } from '../contexts/PlatformContext';
 import SystemCard from '../components/ui/SystemCard';
-import CatalogFilters from '../components/catalog/CatalogFilters';
 import LaptopShowcase from '../components/ui/LaptopShowcase';
 export default function Catalog() {
-  const { systems, categories } = usePlatform();
+  const { systems } = usePlatform();
   const [params, setParams] = useSearchParams();
   const query = params.get('q') || '',
     category = params.get('categoria') || 'Todos',
     sort = params.get('ordem') || 'destaques';
-  const change = (key, val) =>
-    setParams((p) => {
-      const next = new URLSearchParams(p);
-      val ? next.set(key, val) : next.delete(key);
-      return next;
-    });
   const filtered = systems
     .filter(
       (s) =>
@@ -34,35 +27,14 @@ export default function Catalog() {
           : Number(b.featured) - Number(a.featured),
     );
   return (
-    <div className="section page-section">
-      <div className="page-intro">
-        <span className="eyebrow">SEU PONTO DE PARTIDA</span>
-        <h1>
-          Encontre inspiração.
-          <br />
-          <span>Crie algo seu.</span>
-        </h1>
-        <p>
-          Sites e sistemas para diferentes negócios. Escolha uma referência e vamos adaptar à sua
-          ideia.
-        </p>
-      </div>
-      <CatalogFilters
-        query={query}
-        category={category}
-        sort={sort}
-        categories={categories}
-        systems={systems}
-        onChange={change}
-        onReset={() => setParams({})}
-      />
+    <div className="section page-section catalog-page">
       {filtered.length > 0 && (
         <div className="catalog-laptop-section">
           <div className="catalog-presentation-title">
             <span className="eyebrow">UM OLHAR MAIS DE PERTO</span>
-            <h2>
+            <h1>
               Veja as possibilidades <span>em ação.</span>
-            </h2>
+            </h1>
             <p>Navegue pelos modelos e encontre o ponto de partida para o seu projeto.</p>
           </div>
           <LaptopShowcase systems={filtered} label="Vitrine de sistemas do catálogo" />
