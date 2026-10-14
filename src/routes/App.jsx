@@ -12,6 +12,7 @@ import Admin from '../pages/Admin';
 import Terms from '../pages/Terms';
 import NotFound from '../pages/NotFound';
 import VerifyEmail from '../pages/VerifyEmail';
+import Credits from '../pages/Credits';
 export default function App() {
   return (
     <Routes>
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="painel" element={<Dashboard />} />
         <Route path="admin" element={<Admin />} />
         <Route path="termos" element={<Terms />} />
+        <Route path="creditos" element={<Credits />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

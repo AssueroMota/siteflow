@@ -42,7 +42,7 @@ export default function Demo() {
       <p className="demo-notice">
         {url
           ? 'Demonstração externa cadastrada pela equipe.'
-          : 'Prévia visual ilustrativa. Uma demonstração real pode ser cadastrada pela equipe.'}
+          : 'Conceito de site com fotografia real. As funcionalidades do seu projeto são definidas na proposta.'}
       </p>
       <div className={`demo-viewport ${device}`}>
         {url ? (

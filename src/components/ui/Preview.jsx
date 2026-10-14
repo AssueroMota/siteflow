@@ -1,189 +1,81 @@
-import {
-  ArrowUpRight,
-  ShoppingBag,
-  Scissors,
-  Heart,
-  BarChart3,
-  Calendar,
-  LayoutGrid,
-  Search,
-  Plus,
-} from 'lucide-react';
+import { ArrowUpRight, Zap } from 'lucide-react';
+import { themePhotos, photos } from '../../data/photography';
+const headlines = {
+  barber: ['Presença.', 'Estilo. Atitude.'],
+  restaurant: ['Uma experiência', 'que dá água na boca.'],
+  store: ['Sua próxima', 'melhor escolha.'],
+  clinic: ['Cuidado que', 'conecta pessoas.'],
+  dashboard: ['Mais clareza.', 'Melhores decisões.'],
+  landing: ['Sua próxima ideia.', 'Em outra dimensão.'],
+  agenda: ['Seu tempo.', 'Bem cuidado.'],
+  agency: ['Marcas fortes.', 'Presença de verdade.'],
+  workspace: ['Grandes ideias', 'acontecem juntas.'],
+};
 export default function Preview({ system, large = false }) {
+  const theme = system.theme || 'landing';
+  const photo = themePhotos[theme] || photos.development;
   if (system.imageUrl)
     return (
       <div className={`preview preview-image ${large ? 'large' : ''}`}>
-        <img src={system.imageUrl} alt={`Referência visual de ${system.name}`} loading="lazy" />
+        <img
+          src={system.imageUrl}
+          alt={`Referência visual de ${system.name}`}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     );
-  const theme = system.theme || 'landing';
-  const icons = {
-    barber: Scissors,
-    store: ShoppingBag,
-    clinic: Heart,
-    dashboard: BarChart3,
-    agenda: Calendar,
-    workspace: LayoutGrid,
-  };
-  const Icon = icons[theme] || ArrowUpRight;
-  const panel = ['dashboard', 'agenda', 'workspace'].includes(theme);
+  const headline = headlines[theme] || headlines.landing;
   return (
     <div
-      className={`preview ${theme} ${large ? 'large' : ''}`}
-      aria-label={`Prévia ilustrativa de ${system.name}`}
+      className={`preview photo-preview photo-${theme} ${large ? 'large' : ''}`}
+      aria-label={`Conceito visual de ${system.name} com fotografia real`}
     >
-      <div className="mock-browser">
-        <i />
-        <i />
-        <i />
-        <span>{system.name.toLowerCase().replaceAll(' ', '')}.site</span>
+      <div className="photo-browser">
+        <span className="browser-dots">
+          <i />
+          <i />
+          <i />
+        </span>
+        <span>CONCEITO DE SITE · {system.category.toUpperCase()}</span>
+        <ArrowUpRight size={12} />
       </div>
-      {panel ? (
-        <div className="mock-app">
-          <aside>
-            <Icon size={18} />
-            <span />
-            <span />
-            <span />
-            <span />
-          </aside>
-          <div className="mock-app-body">
-            <div className="mock-app-top">
-              <b>
-                {theme === 'agenda'
-                  ? 'Sua semana, organizada.'
-                  : theme === 'workspace'
-                    ? 'Vamos fazer acontecer.'
-                    : 'Visão geral'}
-              </b>
-              <Search size={12} />
-            </div>
-            <div className="mock-stats">
-              {['Receita', 'Projetos', 'Atividades'].map((t, i) => (
-                <div key={t}>
-                  <small>{t}</small>
-                  <b>{['R$ 24.850', '128', '86%'][i]}</b>
-                  <em>↗ {12 + i}%</em>
-                </div>
-              ))}
-            </div>
-            <div className="mock-chart">
-              <div>
-                <b>{theme === 'agenda' ? 'Agendamentos' : 'Desempenho'}</b>
-                <small>Esta semana</small>
-              </div>
-              <div className="bars">
-                {[34, 55, 44, 75, 60, 90, 72, 96, 66, 80].map((h, i) => (
-                  <i key={i} style={{ height: `${h}%` }} />
-                ))}
-              </div>
-            </div>
-            <div className="mock-table">
-              <span>Atividades recentes</span>
-              <i />
-              <i />
-            </div>
-          </div>
+      <div className="photo-scene">
+        <img
+          className="scene-photo"
+          src={photo.path}
+          alt={photo.alt}
+          loading="lazy"
+          decoding="async"
+          width={1400}
+          height={934}
+        />
+        <div className="photo-shade" />
+        <div className="photo-site-header">
+          <b>
+            <Zap size={13} />
+            {system.name}
+          </b>
+          <span>
+            Feito para conectar <ArrowUpRight size={11} />
+          </span>
         </div>
-      ) : (
-        <div className="mock-site">
-          <div className="mock-nav">
-            <b>
-              <Icon size={12} /> {system.name}
-            </b>
-            <span>Sobre　 Serviços　 Contato</span>
-          </div>
-          <div className="mock-site-content">
-            <div>
-              <small>
-                {theme === 'restaurant'
-                  ? 'FEITO COM AFETO'
-                  : theme === 'barber'
-                    ? 'ESTILO É IDENTIDADE'
-                    : theme === 'store'
-                      ? 'NOVA COLEÇÃO'
-                      : 'PENSADO PARA VOCÊ'}
-              </small>
-              <h3>
-                {{
-                  barber: (
-                    <>
-                      Seu estilo.
-                      <br />
-                      Sua marca.
-                    </>
-                  ),
-                  restaurant: (
-                    <>
-                      Sabor que
-                      <br />
-                      fica na memória.
-                    </>
-                  ),
-                  store: (
-                    <>
-                      O essencial.
-                      <br />
-                      Com personalidade.
-                    </>
-                  ),
-                  clinic: (
-                    <>
-                      Cuidar de você.
-                      <br />É a nossa essência.
-                    </>
-                  ),
-                  agency: (
-                    <>
-                      Ideias que
-                      <br />
-                      tomam forma.
-                    </>
-                  ),
-                }[theme] || (
-                  <>
-                    O próximo passo
-                    <br />
-                    começa aqui.
-                  </>
-                )}
-              </h3>
-              <p>Uma experiência feita para o seu dia a dia.</p>
-              <span className="mock-button">
-                {theme === 'store'
-                  ? 'Explorar coleção'
-                  : theme === 'restaurant'
-                    ? 'Ver cardápio'
-                    : 'Conheça mais'}{' '}
-                <ArrowUpRight size={10} />
-              </span>
-            </div>
-            <div className="mock-art">
-              <div className="art-circle" />
-              <Icon className="art-icon" strokeWidth={1} size={95} />
-              {theme === 'restaurant' && (
-                <>
-                  <i className="leaf l1" />
-                  <i className="leaf l2" />
-                  <i className="leaf l3" />
-                </>
-              )}
-              <span className="art-tag">
-                {theme === 'barber'
-                  ? 'Feito para você'
-                  : theme === 'store'
-                    ? 'everyday essentials'
-                    : 'Design + experiência'}
-              </span>
-            </div>
-          </div>
-          <div className="mock-site-bottom">
-            <span>Design responsivo</span>
-            <span>Feito para conectar</span>
-            <span>Seu negócio, online</span>
-          </div>
+        <div className="photo-site-copy">
+          <span className="photo-kicker">{system.category.toUpperCase()}</span>
+          <h3>
+            {headline[0]}
+            <br />
+            <em>{headline[1]}</em>
+          </h3>
+          <span className="photo-site-cta">
+            Conheça a experiência <ArrowUpRight size={13} />
+          </span>
         </div>
-      )}
+        <div className="photo-site-footer">
+          <span>DESIGN QUE FAZ A DIFERENÇA</span>
+          <span>01 — SITEFLOW</span>
+        </div>
+      </div>
     </div>
   );
 }

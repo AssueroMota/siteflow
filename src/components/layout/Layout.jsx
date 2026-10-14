@@ -111,6 +111,7 @@ export default function Layout() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} SiteFlow. Feito para dar vida a ideias.</span>
           <Link to="/termos">Termos e privacidade</Link>
+          <Link to="/creditos">Créditos das fotos</Link>
           {demo && <Link to="/admin">Explorar painel demo</Link>}
         </div>
       </footer>

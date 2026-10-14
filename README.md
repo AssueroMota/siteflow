@@ -2,7 +2,7 @@
 
 **Você conta a ideia. A equipe cria o site ou sistema. O cliente paga uma mensalidade para manutenção.**
 
-Plataforma comercial em português, com identidade coral e roxa, catálogo de inspirações e solicitação de projetos personalizados. O catálogo não vende arquivos ou pacotes de templates.
+Plataforma comercial em português, com fundo azul-marinho, destaques neon em ciano e violeta, tipografia ampliada, fotografias reais e solicitação de projetos personalizados. O catálogo não vende arquivos ou pacotes de templates.
 
 ## Experimentar localmente
 
@@ -31,7 +31,9 @@ O preço inicial de **R$ 149/mês é ilustrativo**, editável no painel. A empre
 - Autenticação com scrypt, sessão em cookie HttpOnly e confirmação de e-mail via SMTP.
 - Webhook Hotmart 2.0 com validação de token e produto, idempotência, controle de vigência, reembolso e cancelamento.
 
-As prévias iniciais são **ilustrações em HTML/CSS**, não sistemas completos já entregues. A equipe pode cadastrar screenshots e links de demonstrações reais. O formulário registra uma solicitação; não desenvolve automaticamente o projeto do cliente.
+As prévias iniciais são **conceitos de design em HTML/CSS com fotografias reais do Unsplash**, não sistemas completos já entregues. A equipe pode cadastrar screenshots e links de demonstrações reais. O formulário registra uma solicitação; não desenvolve automaticamente o projeto do cliente.
+
+As sete fotografias são servidas localmente em `public/images`, em WebP. Fontes e créditos estão na página `/creditos` e em [IMAGE_CREDITS.md](IMAGE_CREDITS.md). Pessoas e estabelecimentos das fotos não representam clientes da SiteFlow. Imagens cadastradas pelo administrador têm prioridade sobre as fotografias padrão.
 
 ## Rotas
 

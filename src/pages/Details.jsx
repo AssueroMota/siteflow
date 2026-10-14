@@ -12,6 +12,7 @@ import {
 import { usePlatform } from '../contexts/PlatformContext';
 import Preview from '../components/ui/Preview';
 import NotFound from './NotFound';
+import { themePhotos } from '../data/photography';
 export default function Details() {
   const { id } = useParams();
   const { systems } = usePlatform();
@@ -38,6 +39,15 @@ export default function Details() {
       <div className="detail-preview">
         <Preview system={s} large />
       </div>
+      {!s.imageUrl && themePhotos[s.theme] && (
+        <div className="photo-attribution">
+          Fotografia real usada como referência de design.{' '}
+          <a href={themePhotos[s.theme].source} target="_blank" rel="noreferrer">
+            Ver foto original no Unsplash
+          </a>{' '}
+          · <Link to="/creditos">Créditos e fontes</Link>
+        </div>
+      )}
       <div className="detail-grid">
         <div>
           <h2>

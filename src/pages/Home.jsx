@@ -14,6 +14,7 @@ import {
   Monitor,
   Smartphone,
 } from 'lucide-react';
+import { photos } from '../data/photography';
 import { usePlatform } from '../contexts/PlatformContext';
 import { money } from '../services/api';
 import Preview from '../components/ui/Preview';
@@ -31,16 +32,14 @@ export default function Home() {
             <span /> GRANDES IDEIAS MERECEM SAIR DO PAPEL
           </span>
           <h1>
-            Você imagina.
-            <br />A gente{' '}
-            <span className="orange-word">
-              cria.
-              <svg viewBox="0 0 290 18" aria-hidden="true">
-                <path d="M4 12Q142-7 282 10" />
-              </svg>
-            </span>
+            Sua ideia.
             <br />
-            Seu negócio <span className="serif-word">cresce.</span>
+            Um site{' '}
+            <span className="neon-word">
+              fora do
+              <br />
+              comum.
+            </span>
           </h1>
           <p>
             Um site com a sua cara. Um sistema do seu jeito.
@@ -64,18 +63,28 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <div className="hero-visual">
-          <span className="visual-orbit orbit-one" />
-          <span className="visual-orbit orbit-two" />
+        <div className="hero-visual hero-visual-neon">
+          <figure className="hero-photo">
+            <img
+              src={photos.studio.path}
+              alt={photos.studio.alt}
+              fetchPriority="high"
+              width={1400}
+              height={2489}
+            />
+            <figcaption>
+              <span>DA PRIMEIRA IDEIA AO PROJETO NO AR</span>
+              <b>
+                O digital pode
+                <br />
+                ir muito além<span>.</span>
+              </b>
+            </figcaption>
+          </figure>
           <div className="floating-label top-label">
-            <Sparkles size={17} /> Da sua ideia para o mundo
+            <Sparkles size={20} /> Sua marca em outra dimensão
           </div>
-          <div className="hero-browser">{visible[0] && <Preview system={visible[0]} large />}</div>
-          <div className="hero-second">
-            {visible.find((s) => s.theme === 'dashboard') && (
-              <Preview system={visible.find((s) => s.theme === 'dashboard')} />
-            )}
-          </div>
+          <div className="hero-mini-preview">{visible[0] && <Preview system={visible[0]} />}</div>
           <div className="floating-label bottom-label">
             <span className="status-dot" />
             <div>
@@ -84,9 +93,8 @@ export default function Home() {
             </div>
             <ArrowUpRight size={19} />
           </div>
-          <MousePointer2 className="hero-cursor" size={30} fill="#7351ee" />
+          <MousePointer2 className="hero-cursor" size={32} fill="#28d9f3" />
           <span className="cursor-name">Sua ideia aqui</span>
-          <span className="hero-spark">✳</span>
         </div>
       </section>
       <section className="promise-strip">
@@ -203,6 +211,14 @@ export default function Home() {
       </section>
       <section className="section service-section">
         <div className="service-art">
+          <img
+            className="service-photo"
+            src={photos.development.path}
+            alt={photos.development.alt}
+            loading="lazy"
+            width={1400}
+            height={934}
+          />
           <span className="service-sticker">É sobre o seu negócio.</span>
           <div className="service-window">
             <div>

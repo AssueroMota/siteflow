@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { PlatformProvider } from './contexts/PlatformContext';
 import App from './routes/App';
 import './styles/global.css';
+import './styles/neon.css';
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

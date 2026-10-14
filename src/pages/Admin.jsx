@@ -606,7 +606,7 @@ export default function Admin() {
                   type="button"
                   onClick={() => setEditing({ ...editing, imageUrl: '' })}
                 >
-                  Remover imagem e usar prévia ilustrativa
+                  Remover imagem e usar fotografia de referência
                 </button>
               )}
               <div className="form-row">
